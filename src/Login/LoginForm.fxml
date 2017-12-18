@@ -19,19 +19,19 @@
           </image>
         </ImageView>
         <FlowPane columnHalignment="CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-        <Button mnemonicParsing="false" prefWidth="125.0" style="-fx-background-color:black;" text="Login" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+        <Button mnemonicParsing="false" onAction="#login" prefWidth="125.0" style="-fx-background-color:black;" text="Login" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
           <GridPane.margin>
             <Insets left="100.0" />
           </GridPane.margin>
         </Button>
-        <Label prefHeight="27.0" prefWidth="150.0" text="Employee ID" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+        <Label id="lbl" fx:id="lblEmployeeId" prefHeight="27.0" prefWidth="150.0" text="Employee ID" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
           <font>
             <Font size="21.0" fx:id="x1" />
           </font>
         </Label>
-        <Label font="$x1" prefHeight="27.0" prefWidth="150.0" text="Password" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-        <PasswordField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="250.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-        <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="250.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+        <Label fx:id="lblPassword" font="$x1" prefHeight="27.0" prefWidth="150.0" text="Password" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <PasswordField fx:id="txtFieldPassword" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="250.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+        <TextField fx:id="txtFieldEmployeeId" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="250.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="40.0" prefWidth="100.0" />
@@ -50,5 +50,11 @@
         <Font name="System Bold" size="24.0" />
       </font>
     </Label>
+    <ImageView fx:id="iconError" fitHeight="28.0" fitWidth="28.0" layoutX="486.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <image>
+        <Image url="@../graphics/Warning_Icon.png" />
+      </image>
+    </ImageView>
+    <Label fx:id="lblErrorMsg" layoutX="526.0" layoutY="304.0" prefWidth="198.0" text="Invalid username or password" visible="false" />
   </children>
 </AnchorPane>
