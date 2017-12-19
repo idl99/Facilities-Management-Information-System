@@ -1,7 +1,7 @@
 package Login;
 
 import Application.ScreenManager;
-import MainMenu.MainMenuController;
+import MainScreen.MainScreenController;
 import Services.LoginService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -42,22 +42,26 @@ public class LoginFormController implements javafx.fxml.Initializable {
     @FXML
     void login(ActionEvent event) {
         try{
-            Document authResult = LoginService.authenticate(getEmployeeId(),getPassword());
-//            lblErrorMsg.setText("Login Successful");
-//            lblErrorMsg.setVisible(true);
+            Document login_credentials = LoginService.authenticate(getEmployeeId(),getPassword());
+            String loggedInUser_EmployeeId = login_credentials.getString("EmpId");
+            String loggedInUser_EmployeeName = login_credentials.getString("EmpName");
+            String loggedInUser_EmployeeRole = login_credentials.getString("EmpRole");
 
+            // First, load the FXML resource
             // Creating instance of FXML Loader to gain access to setController()
             FXMLLoader fxml_loader = new FXMLLoader(getClass().
-                    getResource("/MainMenu/MainMenu.fxml"));
+                    getResource("/MainScreen/MainScreen.fxml"));
+            // Loading menu screen scene graph
             AnchorPane main_menu_screen = fxml_loader.load();
-            MainMenuController main_menu_controller = fxml_loader.getController();
-            main_menu_controller.setLblWelcomeMsg(authResult.getString("EmpName"));
+
+            // Secondly, call setSessionCredentials() method from controller of FXML resource
+            MainScreenController main_menu_controller = fxml_loader.getController();
+            main_menu_controller.setSessionCredentials(loggedInUser_EmployeeId, loggedInUser_EmployeeName, loggedInUser_EmployeeRole);
 
             ScreenManager.changeScreen(main_menu_screen,1024,768);
 
 
         } catch (Exception e){
-            e.printStackTrace();
             iconError.setVisible(true);
             lblErrorMsg.setVisible(true);
         }

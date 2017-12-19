@@ -20,7 +20,7 @@ public class LoginService {
 
         MongoCollection<Document> Employees = database.getCollection("Employees");
         FindIterable queryResult = Employees.find(and(eq("EmpId",empId)
-                ,eq("LoginPwd",password))).projection(fields(include("EmpName"),excludeId()));
+                ,eq("LoginPwd",password))).projection(fields(include("EmpName","EmpID","EmpRole"),excludeId()));
         return (Document) queryResult.iterator().next();
 
     }
