@@ -1,12 +1,14 @@
 package Login;
 
+import Application.ScreenManager;
 import Services.LoginService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+
 import org.bson.Document;
 
 import java.net.URL;
@@ -52,8 +54,12 @@ public class LoginFormController implements javafx.fxml.Initializable {
     void login(ActionEvent event) {
         try{
             Document authResult = LoginService.authenticate(getEmployeeId(),getPassword());
-            lblErrorMsg.setText("Login Successful");
-            lblErrorMsg.setVisible(true);
+//            lblErrorMsg.setText("Login Successful");
+//            lblErrorMsg.setVisible(true);
+            ScreenManager.changeScreen(FXMLLoader.load(getClass().
+                    getResource("/MainMenu/MainMenu.fxml")));
+
+
         } catch (Exception e){
             iconError.setVisible(true);
             lblErrorMsg.setVisible(true);

@@ -1,14 +1,20 @@
-package Login;
+package Application;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class Application extends javafx.application.Application{
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("LoginForm.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("LoginForm.fxml"));
+        Group root = new Group(new AnchorPane());
+        ScreenManager screen_manager = new ScreenManager(root);
+        screen_manager.changeScreen(FXMLLoader.load(getClass().getResource("/Login/LoginForm.fxml")));
+
         primaryStage.setTitle("UoG Facilities Management Information System");
         primaryStage.setScene(new Scene(root,800,400));
+
         primaryStage.setResizable(false);
         primaryStage.show();
     }
