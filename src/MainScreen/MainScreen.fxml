@@ -7,13 +7,19 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="MainScreen.MainScreenController">
+<AnchorPane id="AnchorPane" fx:id="content" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="MainScreen.MainScreenController">
   <children>
-    <Region layoutX="0.0" layoutY="0.0" prefHeight="768.0" prefWidth="350.0" style="-fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #787878ff 0%, #2c2c2cff 100%), -fx-body-color;&#10;-fx-base: derive(#d0d0d0, -70%);" />
-    <Label fx:id="lblWelcomeMsg" alignment="CENTER" layoutX="25.0" layoutY="50.0" prefHeight="30.0" prefWidth="300.0" text="" textAlignment="CENTER" textFill="WHITE">
+    <Region layoutX="150.0" layoutY="0.0" prefHeight="768.0" prefWidth="500.0" style="-fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #787878ff 0%, #2c2c2cff 100%), -fx-body-color;&#10;-fx-base: derive(#d0d0d0, -70%);" />
+    <Label fx:id="lblMenuHeader" alignment="CENTER" layoutX="176.0" layoutY="77.0" prefWidth="450.0" style="-fx-background-color: white;&#10;-fx-background-radius: 5px, 5px, 4px, 3px;&#10;-fx-background-insets: 0px 0px -1px 0px, 0px, 1px, 2px;" text="" textAlignment="LEFT" textFill="BLACK">
       <font>
-        <Font name="System Bold" size="14.0" />
+        <Font name="System Bold" size="36.0" />
       </font>
     </Label>
+    <Label fx:id="lblSessionUser" alignment="CENTER" layoutX="606.0" layoutY="14.0" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, white;&#10;-fx-background-radius: 5px, 5px, 4px, 3px;&#10;-fx-background-insets: 0px 0px -1px 0px, 0px, 1px, 2px;" text="">
+      <font>
+        <Font name="System Bold" size="18.0" />
+      </font>
+    </Label>
+    <Button fx:id="btnLogout" layoutX="661.0" layoutY="50.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
   </children>
 </AnchorPane>

@@ -1,8 +1,11 @@
 package Login;
 
 import Application.ScreenManager;
+
 import MainScreen.MainScreenController;
+
 import Services.LoginService;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -17,7 +20,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class LoginFormController implements javafx.fxml.Initializable {
-
 
     @FXML private TextField txtFieldEmployeeId;
     @FXML private PasswordField txtFieldPassword;
@@ -43,6 +45,7 @@ public class LoginFormController implements javafx.fxml.Initializable {
     void login(ActionEvent event) {
         try{
             Document login_credentials = LoginService.authenticate(getEmployeeId(),getPassword());
+
             String loggedInUser_EmployeeId = login_credentials.getString("EmpId");
             String loggedInUser_EmployeeName = login_credentials.getString("EmpName");
             String loggedInUser_EmployeeRole = login_credentials.getString("EmpRole");
@@ -51,15 +54,17 @@ public class LoginFormController implements javafx.fxml.Initializable {
             // Creating instance of FXML Loader to gain access to setController()
             FXMLLoader fxml_loader = new FXMLLoader(getClass().
                     getResource("/MainScreen/MainScreen.fxml"));
-            // Loading menu screen scene graph
+
+            // Loading menu screen scene graph from FXML File
+            // FXML file should be loaded first in order to access the controller using
+            // the getController() instance method of FXML Loader
             AnchorPane main_menu_screen = fxml_loader.load();
 
             // Secondly, call setSessionCredentials() method from controller of FXML resource
             MainScreenController main_menu_controller = fxml_loader.getController();
             main_menu_controller.setSessionCredentials(loggedInUser_EmployeeId, loggedInUser_EmployeeName, loggedInUser_EmployeeRole);
 
-            ScreenManager.changeScreen(main_menu_screen,1024,768);
-
+            ScreenManager.changeScreen(main_menu_screen,800,768);
 
         } catch (Exception e){
             iconError.setVisible(true);
