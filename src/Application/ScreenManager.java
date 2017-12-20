@@ -12,13 +12,13 @@ public class ScreenManager {
         this.root = root;
     }
 
-    public static void changeScreen(Node base, int screen_width, int screen_height){
+    public void changeScreen(Node base, int screen_width, int screen_height){
         changeScreen(base);
         root.getScene().getWindow().setWidth(screen_width);
         root.getScene().getWindow().setHeight(screen_height);
     }
 
-    public static void changeScreen(Node base){
+    public void changeScreen(Node base){
         root.getChildren().clear();
         root.getChildren().add(base);
     }

@@ -15,7 +15,7 @@
       <children>
         <ImageView fitHeight="100.0" fitWidth="275.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.rowSpan="4">
           <image>
-            <Image url="@../graphics/Westminster_Logo.jpg" />
+            <Image url="@../Graphics/Westminster_Logo.jpg" />
           </image>
         </ImageView>
         <FlowPane columnHalignment="CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
@@ -52,7 +52,7 @@
     </Label>
     <ImageView fx:id="iconError" fitHeight="28.0" fitWidth="28.0" layoutX="486.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true" visible="false">
       <image>
-        <Image url="@../graphics/Warning_Icon.png" />
+        <Image url="@../Graphics/Warning_Icon.png" />
       </image>
     </ImageView>
     <Label fx:id="lblErrorMsg" layoutX="526.0" layoutY="304.0" prefWidth="198.0" text="Invalid username or password" visible="false" />

@@ -1,23 +1,20 @@
 package Login;
 
-import Application.ScreenManager;
-
 import MainScreen.MainScreenController;
-
-import Services.LoginService;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-
 import javafx.scene.layout.AnchorPane;
+
 import org.bson.Document;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static Application.Application.screen;
 
 public class LoginFormController implements javafx.fxml.Initializable {
 
@@ -25,7 +22,6 @@ public class LoginFormController implements javafx.fxml.Initializable {
     @FXML private PasswordField txtFieldPassword;
     @FXML private ImageView iconError;
     @FXML private Label lblErrorMsg;
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -35,7 +31,6 @@ public class LoginFormController implements javafx.fxml.Initializable {
     public String getEmployeeId(){
         return txtFieldEmployeeId.getText();
     }
-
 
     public String getPassword(){
         return txtFieldPassword.getText();
@@ -64,7 +59,7 @@ public class LoginFormController implements javafx.fxml.Initializable {
             MainScreenController main_menu_controller = fxml_loader.getController();
             main_menu_controller.setSessionCredentials(loggedInUser_EmployeeId, loggedInUser_EmployeeName, loggedInUser_EmployeeRole);
 
-            ScreenManager.changeScreen(main_menu_screen,800,768);
+            screen.changeScreen(main_menu_screen,800,768);
 
         } catch (Exception e){
             iconError.setVisible(true);

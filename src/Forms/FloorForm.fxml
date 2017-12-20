@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="480.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Forms.FloorFormController">
+  <children>
+    <Label alignment="CENTER" layoutX="60.0" layoutY="25.0" prefHeight="30.0" prefWidth="360.0" style="-fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, white;&#10;-fx-background-radius: 5px, 5px, 4px, 3px;&#10;-fx-background-insets: 0px 0px -1px 0px, 0px, 1px, 2px;" text="INSERT BUILDING FLOOR DETAILS">
+      <font>
+        <Font name="System Bold" size="18.0" />
+      </font>
+    </Label>
+    <Label alignment="CENTER" layoutX="40.0" layoutY="100.0" text="Building Number:" />
+    <Label alignment="CENTER" layoutX="40.0" layoutY="150.0" prefWidth="117.0" text="Building Name:" />
+    <Label alignment="CENTER" layoutX="40.0" layoutY="250.0" prefWidth="117.0" text="Floor GFA:" />
+    <Label alignment="CENTER" layoutX="40.0" layoutY="200.0" prefWidth="117.0" text="Floor Number:" />
+    <Label alignment="CENTER" layoutX="40.0" layoutY="300.0" prefWidth="117.0" text="Floor UFA:" />
+    <TextField fx:id="txtFieldBuildingNum" layoutX="175.0" layoutY="97.0" prefWidth="245.0" promptText="Enter building number here..." />
+    <TextField fx:id="txtFieldBuildingName" layoutX="175.0" layoutY="147.0" prefWidth="245.0" promptText="Optional: Enter building name here" />
+    <TextField id="txtFieldBuildingFloorNum" fx:id="txtFieldFloorNum" layoutX="175.0" layoutY="200.0" prefWidth="245.0" promptText="Enter floor number here..." />
+    <TextField fx:id="txtFieldFloorGFA" editable="true" layoutX="175.0" layoutY="247.0" prefWidth="245.0" promptText="Enter floor GFA here..." />
+    <TextField fx:id="txtFieldFloorUFA" editable="true" layoutX="175.0" layoutY="297.0" prefWidth="245.0" promptText="Enter floor UFA here..." />
+    <Button layoutX="223.0" layoutY="341.0" mnemonicParsing="false" onAction="#submitForm" prefHeight="30.0" prefWidth="150.0" text="Submit" />
+  </children>
+</AnchorPane>
