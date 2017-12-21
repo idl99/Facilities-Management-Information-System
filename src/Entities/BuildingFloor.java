@@ -5,7 +5,7 @@ import org.bson.Document;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class BuildingFloor implements DatabaseObject{
+public class BuildingFloor implements DatabaseConnectivity {
 
     private String buildingNumber;
     private String buildingName;
@@ -27,21 +27,26 @@ public class BuildingFloor implements DatabaseObject{
         this.UFA = inputUFA;
     }
 
-    /*public BuildingFloor(String inputFloorNumber){
+    /*public BuildingFloor(String inputFloorNumber) {
         BasicDBObject query = new BasicDBObject();
-        query.put("FloorNum",inputFloorNumber);
+        query.put("FloorNum", inputFloorNumber);
         readRecordFromDatabase(query);
     }*/
 
     @Override
-    public void writeRecordToDatabase() {
-        Map<String,Object> record = new LinkedHashMap<>();
+    public String writeRecordToDatabase() {
+
+        Document record = new Document();
+
         record.put("BuildingNum",this.buildingNumber);
-        if(this.buildingName!=null) record.put("BuildingName",this.buildingName);
+        if(this.buildingName.length()!=0) record.put("BuildingName",this.buildingName);
         record.put("FloorNum",this.floorNumber);
         record.put("FloorGFA",this.GFA);
         record.put("FloorUFA",this.UFA);
-        database.getCollection("BuildingFloors").insertOne(new Document(record));
+
+        BuildingFloorsCollection.insertOne(record);
+
+        return "Successfully added details of Building number- "+buildingNumber+" Floor number- "+floorNumber;
     }
 
     @Override

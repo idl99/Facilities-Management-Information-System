@@ -3,11 +3,12 @@
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="480.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Forms.FloorFormController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="480.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Forms.FloorFormController">
   <children>
     <Label alignment="CENTER" layoutX="60.0" layoutY="25.0" prefHeight="30.0" prefWidth="360.0" style="-fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, white;&#10;-fx-background-radius: 5px, 5px, 4px, 3px;&#10;-fx-background-insets: 0px 0px -1px 0px, 0px, 1px, 2px;" text="INSERT BUILDING FLOOR DETAILS">
       <font>
@@ -24,6 +25,16 @@
     <TextField id="txtFieldBuildingFloorNum" fx:id="txtFieldFloorNum" layoutX="175.0" layoutY="200.0" prefWidth="245.0" promptText="Enter floor number here..." />
     <TextField fx:id="txtFieldFloorGFA" editable="true" layoutX="175.0" layoutY="247.0" prefWidth="245.0" promptText="Enter floor GFA here..." />
     <TextField fx:id="txtFieldFloorUFA" editable="true" layoutX="175.0" layoutY="297.0" prefWidth="245.0" promptText="Enter floor UFA here..." />
-    <Button layoutX="223.0" layoutY="341.0" mnemonicParsing="false" onAction="#submitForm" prefHeight="30.0" prefWidth="150.0" text="Submit" />
+    <Button layoutX="165.0" layoutY="346.0" mnemonicParsing="false" onAction="#submitForm" prefHeight="30.0" prefWidth="150.0" text="Submit" />
+    <Label fx:id="lblSuccessMsg" alignment="CENTER_LEFT" layoutX="99.0" layoutY="385.0" prefHeight="66.0" prefWidth="350.0" text="" wrapText="true">
+      <font>
+        <Font size="12.0" />
+      </font>
+    </Label>
+    <ImageView fx:id="iconSuccess" fitHeight="30.0" fitWidth="30.0" layoutX="60.0" layoutY="388.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <image>
+        <Image url="@../Graphics/Sucess_Icon.png" />
+      </image>
+    </ImageView>
   </children>
 </AnchorPane>
