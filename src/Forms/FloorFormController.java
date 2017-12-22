@@ -30,26 +30,17 @@ public class FloorFormController {
 
     @FXML void submitForm(){
 
-        String buildingNum = txtFieldBuildingNum.getText();
-        String buildingName = txtFieldBuildingName.getText();
-        String floorNum = txtFieldFloorNum.getText();
-        String floorGFA = txtFieldFloorGFA.getText();
-        String floorUFA = txtFieldFloorUFA.getText();
-
-        BuildingFloor record = new BuildingFloor(buildingNum,buildingName,floorNum,floorGFA,floorUFA);
+        BuildingFloor record = new BuildingFloor(txtFieldBuildingNum.getText(),txtFieldBuildingName.getText(),
+                txtFieldFloorNum.getText(),txtFieldFloorGFA.getText(),txtFieldFloorUFA.getText());
 
         String response = record.writeRecordToDatabase();
         iconSuccess.setVisible(true);
         lblSuccessMsg.setText(response+". You may continue to add details of a new building floor above," +
                 "or close this window");
 
-        txtFieldBuildingNum.clear();
-        txtFieldBuildingName.clear();
-        txtFieldFloorNum.clear();
-        txtFieldFloorGFA.clear();
-        txtFieldFloorUFA.clear();
-    }
-
-    @FXML void goBack(){
+        for(TextField textfield: new TextField[]{txtFieldBuildingNum,txtFieldBuildingName,
+                                                txtFieldFloorNum,txtFieldFloorGFA,txtFieldFloorUFA}){
+            textfield.clear();
+        }
     }
 }

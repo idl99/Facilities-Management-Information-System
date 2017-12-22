@@ -25,7 +25,7 @@
     <TextField id="txtFieldBuildingFloorNum" fx:id="txtFieldFloorNum" layoutX="175.0" layoutY="200.0" prefWidth="245.0" promptText="Enter floor number here..." />
     <TextField fx:id="txtFieldFloorGFA" editable="true" layoutX="175.0" layoutY="247.0" prefWidth="245.0" promptText="Enter floor GFA here..." />
     <TextField fx:id="txtFieldFloorUFA" editable="true" layoutX="175.0" layoutY="297.0" prefWidth="245.0" promptText="Enter floor UFA here..." />
-    <Button layoutX="165.0" layoutY="346.0" mnemonicParsing="false" onAction="#submitForm" prefHeight="30.0" prefWidth="150.0" text="Submit" />
+    <Button layoutX="223.0" layoutY="346.0" mnemonicParsing="false" onAction="#submitForm" prefHeight="30.0" prefWidth="150.0" text="Submit" />
     <Label fx:id="lblSuccessMsg" alignment="CENTER_LEFT" layoutX="99.0" layoutY="385.0" prefHeight="66.0" prefWidth="350.0" text="" wrapText="true">
       <font>
         <Font size="12.0" />

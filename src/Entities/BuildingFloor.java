@@ -12,23 +12,12 @@ public class BuildingFloor implements DatabaseConnectivity {
 
     public BuildingFloor(String inputBuildingNumber, String inputBuildingName, String inputFloorNumber,
                          String inputGFA, String inputUFA){
-        this(inputBuildingNumber,inputFloorNumber,inputGFA,inputUFA);
-        this.buildingName = inputBuildingName;
-    }
-
-    public BuildingFloor(String inputBuildingNumber, String inputFloorNumber,
-                         String inputGFA, String inputUFA){
         this.buildingNumber = inputBuildingNumber;
+        this.buildingName = inputBuildingName;
         this.floorNumber = inputFloorNumber;
         this.GFA = inputGFA;
         this.UFA = inputUFA;
     }
-
-    /*public BuildingFloor(String inputFloorNumber) {
-        BasicDBObject query = new BasicDBObject();
-        query.put("FloorNum", inputFloorNumber);
-        readRecordFromDatabase(query);
-    }*/
 
     @Override
     public String writeRecordToDatabase() {

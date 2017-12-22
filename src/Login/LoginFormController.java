@@ -1,5 +1,6 @@
 package Login;
 
+import Application.Main;
 import MainScreen.MainScreenController;
 
 import javafx.event.ActionEvent;
@@ -13,9 +14,6 @@ import org.bson.Document;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import static Application.Application.screen;
-
 public class LoginFormController implements javafx.fxml.Initializable {
 
     @FXML private TextField txtFieldEmployeeId;
@@ -53,13 +51,13 @@ public class LoginFormController implements javafx.fxml.Initializable {
             // Loading menu screen scene graph from FXML File
             // FXML file should be loaded first in order to access the controller using
             // the getController() instance method of FXML Loader
-            AnchorPane main_menu_screen = fxml_loader.load();
+            AnchorPane mainMenuScreen = fxml_loader.load();
 
             // Secondly, call setSessionCredentials() method from controller of FXML resource
             MainScreenController main_menu_controller = fxml_loader.getController();
             main_menu_controller.setSessionCredentials(loggedInUser_EmployeeId, loggedInUser_EmployeeName, loggedInUser_EmployeeRole);
 
-            screen.changeScreen(main_menu_screen,800,768);
+            Main.changeScreen(mainMenuScreen);
 
         } catch (Exception e){
             iconError.setVisible(true);

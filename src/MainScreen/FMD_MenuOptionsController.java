@@ -8,8 +8,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import static Application.Application.screen;
-
 public class FMD_MenuOptionsController {
     @FXML
     void recordFloorDetails(ActionEvent event) {

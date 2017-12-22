@@ -1,5 +1,6 @@
 package MainScreen;
 
+import Application.Main;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -8,13 +9,11 @@ import javafx.fxml.Initializable;
 
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import static Application.Application.screen;
 
 public class MainScreenController implements Initializable{
 
@@ -41,7 +40,7 @@ public class MainScreenController implements Initializable{
     }
 
     public void showMenuOptions(){
-        AnchorPane menuOptionsPane=null;
+        Pane menuOptionsPane=null;
         try {
             if (sessionUser_EmpRole.equals("FMD_Staff")){
                 menuOptionsPane = FXMLLoader.load(getClass().getResource("/MainScreen/FMD_MenuOptions.fxml"));
@@ -61,7 +60,7 @@ public class MainScreenController implements Initializable{
 
     @FXML public void logout(ActionEvent event){
         try {
-            screen.changeScreen(FXMLLoader.load(getClass().getResource("/Login/LoginForm.fxml")),800,400);
+            Main.changeScreen(FXMLLoader.load(getClass().getResource("/Login/LoginForm.fxml")));
         } catch (IOException e) {
             e.printStackTrace();
         }
