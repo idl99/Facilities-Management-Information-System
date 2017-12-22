@@ -19,7 +19,6 @@ public class BuildingFloor implements DatabaseConnectivity {
         this.UFA = inputUFA;
     }
 
-    @Override
     public String writeRecordToDatabase() {
 
         Document record = new Document();
@@ -35,16 +34,13 @@ public class BuildingFloor implements DatabaseConnectivity {
         return "Successfully added details of Building number- "+buildingNumber+" Floor number- "+floorNumber;
     }
 
-    @Override
     public void readRecordFromDatabase() {
     }
 
-    @Override
     public void modifyRecordInDatabase() {
 
     }
 
-    @Override
     public void deleteRecordInDatabase() {
 
     }
