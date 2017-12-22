@@ -2,9 +2,6 @@ package Entities;
 
 import org.bson.Document;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 public class BuildingFloor implements DatabaseConnectivity {
 
     private String buildingNumber;
