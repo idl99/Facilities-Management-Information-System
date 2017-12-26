@@ -1,4 +1,4 @@
-package MainScreen;
+package Session;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,7 +14,7 @@ public class FMD_MenuOptionsController {
             //screen.changeScreen(FXMLLoader.load(getClass().getResource("../Forms/FloorForm.fxml")),480,520);
         try {
             Stage stage = new Stage();
-            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../Forms/FloorForm.fxml"))));
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("Forms/FloorForm.fxml"))));
             stage.setResizable(false);
             stage.showAndWait();
         } catch (IOException e) {

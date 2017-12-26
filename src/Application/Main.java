@@ -14,10 +14,10 @@ public class Main extends javafx.application.Application{
 
         stage.setTitle("UoG Facilities Management Information System");
         stage.setScene(new Scene(root));
+        stage.setResizable(false);
 
         changeScreen(FXMLLoader.load(getClass().getResource("/Login/LoginForm.fxml")));
 
-        stage.setResizable(false);
         stage.show();
     }
 

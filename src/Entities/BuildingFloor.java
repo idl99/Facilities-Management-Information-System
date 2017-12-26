@@ -1,5 +1,6 @@
 package Entities;
 
+import Application.DatabaseConnectivity;
 import org.bson.Document;
 
 public class BuildingFloor implements DatabaseConnectivity {
