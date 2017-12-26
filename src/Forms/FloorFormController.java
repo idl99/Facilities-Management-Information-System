@@ -1,5 +1,6 @@
 package Forms;
 
+import Application.DatabaseConnectivity;
 import Entities.BuildingFloor;
 import javafx.fxml.FXML;
 
@@ -7,7 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
-public class FloorFormController {
+public class FloorFormController implements DatabaseConnectivity {
 
     @FXML private TextField txtFieldBuildingNum;
 
@@ -30,14 +31,16 @@ public class FloorFormController {
 
     @FXML void submitForm(){
 
-        BuildingFloor record = new BuildingFloor(txtFieldBuildingNum.getText(),txtFieldBuildingName.getText(),
-                txtFieldFloorNum.getText(),txtFieldFloorGFA.getText(),txtFieldFloorUFA.getText());
+        BuildingFloor record = new BuildingFloor(txtFieldBuildingNum.getText(),
+                txtFieldBuildingName.getText(),
+                txtFieldFloorNum.getText(),
+                txtFieldFloorGFA.getText(),
+                txtFieldFloorUFA.getText());
 
-        String response = record.writeRecordToDatabase();
+        String response = record.writeToDatabase();
         iconSuccess.setVisible(true);
         lblSuccessMsg.setText(response+". You may continue to add details of a new building floor above," +
                 "or close this window");
-
         for(TextField textfield: new TextField[]{txtFieldBuildingNum,txtFieldBuildingName,
                                                 txtFieldFloorNum,txtFieldFloorGFA,txtFieldFloorUFA}){
             textfield.clear();
