@@ -1,6 +1,6 @@
 package Forms;
 
-import Application.DatabaseConnectivity;
+import Application.DatabaseConfig;
 import Entities.BuildingFloor;
 import javafx.fxml.FXML;
 
@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
-public class FloorFormController implements DatabaseConnectivity {
+public class FloorFormController{
 
     @FXML private TextField txtFieldBuildingNum;
 

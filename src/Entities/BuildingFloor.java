@@ -1,8 +1,8 @@
 package Entities;
 
-import Application.DatabaseConnectivity;
+import Application.DatabaseConfig;
 
-public class BuildingFloor implements DatabaseConnectivity{
+public class BuildingFloor{
 
     private String buildingNumber;
     private String buildingName;
@@ -68,7 +68,7 @@ public class BuildingFloor implements DatabaseConnectivity{
     }
 
     public String writeToDatabase() {
-        BuildingFloorsCollection.insertOne(this);
+        DatabaseConfig.BUILDING_FLOORS_COLLECTION.insertOne(this);
         return "Successfully added details of Building number- "+getBuildingNumber()+" Floor number- "+getFloorNumber();
     }
 

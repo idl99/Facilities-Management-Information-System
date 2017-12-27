@@ -1,15 +1,14 @@
 package Login;
 
-import Application.DatabaseConnectivity;
-
 // MongoDB imports
+import Application.DatabaseConfig;
 import com.mongodb.client.*;
 import static com.mongodb.client.model.Filters.*;
 import static com.mongodb.client.model.Projections.*;
 
 import org.bson.Document;
 
-public class Login implements DatabaseConnectivity{
+public class Login{
 
     private String loginId;
     private String loginPassword;
@@ -34,7 +33,7 @@ public class Login implements DatabaseConnectivity{
     }
 
     Document authenticate(){
-        FindIterable query = EmployeesCollection.find(and(eq("EmpId",loginId)
+        FindIterable query = DatabaseConfig.EMPLOYEES_COLLECTION.find(and(eq("EmpId",loginId)
                 ,eq("LoginPwd",loginPassword))).projection(fields(include("EmpId", "EmpName", "EmpRole"),excludeId()));
         return (Document) query.iterator().next();
     }
