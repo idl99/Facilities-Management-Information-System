@@ -2,6 +2,7 @@ package Application;
 
 import Entities.BuildingFloor;
 
+import Entities.Space;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -26,6 +27,8 @@ public class DatabaseConfig {
     public static final MongoCollection<Document> EMPLOYEES_COLLECTION = DATABASE.getCollection("Employees");
     public static final MongoCollection<BuildingFloor> BUILDING_FLOORS_COLLECTION = DATABASE.getCollection("BuildingFloors",
             BuildingFloor.class);
+    public  static final MongoCollection<Space> SPACES_COLLECTION = DATABASE.getCollection("Spaces",
+            Space.class);
 
     private DatabaseConfig(){
 

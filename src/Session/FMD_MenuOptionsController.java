@@ -11,20 +11,33 @@ import java.io.IOException;
 public class FMD_MenuOptionsController {
     @FXML
     void recordFloorDetails(ActionEvent event) {
-            //screen.changeScreen(FXMLLoader.load(getClass().getResource("../Forms/FloorForm.fxml")),480,520);
-        try {
-            Stage stage = new Stage();
-            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/Forms/FloorForm.fxml"))));
-            stage.setResizable(false);
-            stage.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        newFormWindow("/Forms/FloorForm.fxml");
+    }
+
+    @FXML
+    void recordRoomSpace(ActionEvent event){
+        newFormWindow("/Forms/SpaceForm.fxml");
+    }
+
+    @FXML
+    void recordFurnitureItem(ActionEvent event){
+        newFormWindow("/Forms/FurnitureForm.fxml");
     }
 
     @FXML
     void initialize() {
 
+    }
+
+    void newFormWindow(String fxmlResource){
+        try {
+            Stage stage = new Stage();
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource(fxmlResource))));
+            stage.setResizable(false);
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

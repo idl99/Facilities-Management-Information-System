@@ -1,6 +1,8 @@
 package Entities;
 
 import Application.DatabaseConfig;
+import com.mongodb.client.DistinctIterable;
+import static com.mongodb.client.model.Filters.*;
 
 public class BuildingFloor{
 
@@ -17,6 +19,11 @@ public class BuildingFloor{
         this.floorNumber = floorNumber;
         this.GFA = GFA;
         this.UFA = UFA;
+    }
+
+    public BuildingFloor(String buildingNumber, String floorNumber){
+        this.buildingNumber = buildingNumber;
+        this.floorNumber = floorNumber;
     }
 
     /*
@@ -81,5 +88,10 @@ public class BuildingFloor{
 
     public void deleteInDatabase() {
 
+    }
+
+    public static DistinctIterable<String> getDistinctBuildingFloor(String buildingNumber){
+        return DatabaseConfig.BUILDING_FLOORS_COLLECTION.distinct("floorNumber",
+                and(eq("buildingNumber",buildingNumber)),String.class);
     }
 }
