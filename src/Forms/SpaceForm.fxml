@@ -4,12 +4,10 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Forms.SpaceFormController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Forms.SpaceFormController">
    <children>
       <Label alignment="CENTER" layoutX="60.0" layoutY="30.0" prefHeight="30.0" prefWidth="360.0" style="-fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, white;&#10;-fx-background-radius: 5px, 5px, 4px, 3px;&#10;-fx-background-insets: 0px 0px -1px 0px, 0px, 1px, 2px;" text="INSERT SPACE DETAILS">
          <font>
@@ -19,15 +17,14 @@
       <Label alignment="CENTER_RIGHT" layoutX="20.0" layoutY="100.0" prefWidth="117.0" text="Building Number:" />
       <Label alignment="CENTER_RIGHT" layoutX="20.0" layoutY="135.0" prefWidth="117.0" text="Floor Number:" />
       <Label alignment="CENTER_RIGHT" layoutX="20.0" layoutY="200.0" prefWidth="117.0" text="Space Id:" />
-      <TextField fx:id="txtFieldSpaceId" editable="false" layoutX="150.0" layoutY="196.0" prefHeight="26.0" prefWidth="40.0" />
+      <TextField fx:id="txtFieldSpaceId" layoutX="150.0" layoutY="196.0" prefHeight="26.0" prefWidth="75.0" />
       <ChoiceBox fx:id="choiceBoxBuildingNum" layoutX="150.0" layoutY="95.0" onContextMenuRequested="#getBuildingNumbers" prefHeight="26.0" prefWidth="60.0" />
       <ChoiceBox fx:id="choiceBoxFloorNum" layoutX="150.0" layoutY="130.0" prefHeight="26.0" prefWidth="60.0" />
-      <TextField fx:id="txtFieldOptionalSuffix" layoutX="200.0" layoutY="196.0" prefHeight="26.0" prefWidth="75.0" />
       <Label alignment="CENTER_RIGHT" layoutX="19.0" layoutY="280.0" prefWidth="117.0" text="Space Type:" />
       <ChoiceBox fx:id="choiceBoxSpaceType" layoutX="151.0" layoutY="275.0" prefHeight="26.0" prefWidth="150.0" />
       <Label alignment="CENTER_RIGHT" layoutX="20.0" layoutY="327.0" prefWidth="117.0" text="Occupant- Employee Id:">
          <font>
-            <Font size="10.0" />
+            <Font size="11.0" />
          </font>
       </Label>
       <TextField fx:id="textFieldEmployeeId" layoutX="150.0" layoutY="322.0" prefHeight="26.0" prefWidth="70.0" />
@@ -35,20 +32,10 @@
       <TextField fx:id="txtFieldSpaceName" layoutX="150.0" layoutY="235.0" prefHeight="26.0" prefWidth="210.0" />
       <Label alignment="CENTER_RIGHT" layoutX="19.0" layoutY="362.0" prefWidth="117.0" text="Occupying Department:">
          <font>
-            <Font size="10.0" />
+            <Font size="11.0" />
          </font>
       </Label>
       <TextField fx:id="txtFieldDepartment" layoutX="150.0" layoutY="357.0" prefHeight="26.0" prefWidth="160.0" />
       <Button layoutX="155.0" layoutY="410.0" mnemonicParsing="false" onAction="#submitForm" prefHeight="30.0" prefWidth="150.0" text="Submit" />
-      <Label fx:id="lblSuccessMsg" alignment="CENTER_LEFT" layoutX="82.0" layoutY="458.0" prefHeight="40.0" prefWidth="350.0" wrapText="true">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="iconSuccess" fitHeight="30.0" fitWidth="30.0" layoutX="43.0" layoutY="461.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../Graphics/Sucess_Icon.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>

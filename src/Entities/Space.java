@@ -71,7 +71,7 @@ public class Space{
 
     public String writeToDatabase(){
         DatabaseConfig.SPACES_COLLECTION.insertOne(this);
-        return "Successfully added Space Id - "+this.id+" to Spaces Database";
+        return "Successfully added Space Id - "+this.id+" to Spaces Database.";
     }
 
 }

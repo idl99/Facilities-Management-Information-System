@@ -7,16 +7,19 @@ import Entities.Space;
 import Entities.SpaceType;
 import com.mongodb.client.DistinctIterable;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.Node;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class SpaceFormController implements Initializable {
@@ -29,9 +32,6 @@ public class SpaceFormController implements Initializable {
     private TextField txtFieldSpaceId;
 
     @FXML
-    private TextField txtFieldOptionalSuffix;
-
-    @FXML
     private ChoiceBox<SpaceType> choiceBoxSpaceType;
 
     @FXML
@@ -42,12 +42,6 @@ public class SpaceFormController implements Initializable {
 
     @FXML
     private TextField txtFieldDepartment;
-
-    @FXML
-    private Label lblSuccessMsg;
-
-    @FXML
-    private ImageView iconSuccess;
 
 
     @Override
@@ -64,6 +58,7 @@ public class SpaceFormController implements Initializable {
         }));
 
         getBuildingNumbers();
+
         bindSpaceTypes();
 
     }
@@ -98,16 +93,48 @@ public class SpaceFormController implements Initializable {
     }
 
     @FXML
-    void submitForm(){
+    void submitForm(ActionEvent event){
+
         Space space = new Space(new BuildingFloor(choiceBoxBuildingNum.getValue(),choiceBoxFloorNum.getValue()),
-                (txtFieldSpaceId.getText()+txtFieldOptionalSuffix.getText()),
+                txtFieldSpaceId.getText(),
                 txtFieldSpaceName.getText(),
                 choiceBoxSpaceType.getValue(),
                 textFieldEmployeeId.getText(),
                 txtFieldDepartment.getText());
+
         String response = space.writeToDatabase();
-        iconSuccess.setVisible(true);
-        lblSuccessMsg.setText(response);
+
+        // Clearing text fields
+        for(TextField textField:new TextField[]{txtFieldSpaceId,textFieldEmployeeId,
+                txtFieldDepartment,txtFieldSpaceName}){
+            textField.clear();
+        }
+
+        // Clearing choice box fields
+        for(ChoiceBox<?> choiceBox: new ChoiceBox[]{choiceBoxBuildingNum,choiceBoxFloorNum,
+                choiceBoxSpaceType}){
+            choiceBox.valueProperty().setValue(null);
+        }
+
+        // Display message dialog
+        if(showMessageDialog(response).get() == ButtonType.CANCEL ){
+            ((Stage)(((Node)(event.getSource())).getScene().getWindow())).close();
+        }
+
+
+    }
+
+    Optional<ButtonType> showMessageDialog(String message){
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("FMIS - Floor Form Submission");
+        alert.setHeaderText("Successfully recorded details");
+        alert.setContentText(message+" Do you wish to add any more records? " +
+                "If YES, Click on OK, else Click on Cancel to Exit");
+        alert.setGraphic(new ImageView(new Image("/Graphics/Sucess_Icon.png")));
+        Optional<ButtonType> result = alert.showAndWait();
+
+        return result;
     }
 
 }
