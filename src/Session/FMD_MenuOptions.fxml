@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Session.FMD_MenuOptionsController">
+  <children>
+    <Button layoutX="75.0" layoutY="70.0" mnemonicParsing="false" onAction="#recordFloorDetails" prefHeight="30.0" prefWidth="300.0" style="" text="RECORD FLOOR DETAILS">
+      <font>
+        <Font name="System Bold" size="14.0" fx:id="x1" />
+      </font>
+    </Button>
+    <Button font="$x1" layoutX="75.0" layoutY="200.0" mnemonicParsing="false" onAction="#recordFurnitureItem" prefHeight="30.0" prefWidth="300.0" style="" text="RECORD FURNITURE ITEMS" />
+    <Button font="$x1" layoutX="75.0" layoutY="250.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="300.0" style="" text="MODIFY EXISTING FURNITURE" />
+    <Button font="$x1" layoutX="75.0" layoutY="330.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="300.0" style="" text="VIEW/ACTION MAINTENANCE CALLS" />
+    <Button font="$x1" layoutX="75.0" layoutY="380.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="300.0" style="" text="SCHEDULE/MODIFY OFFICE RELOCATION" />
+      <Button layoutX="75.0" layoutY="120.0" mnemonicParsing="false" onAction="#recordRoomSpace" prefHeight="30.0" prefWidth="300.0" style="" text="RECORD ROOM SPACE">
+         <font>
+            <Font name="System Bold" size="14.0" fx:id="x11" />
+         </font>
+      </Button>
+  </children>
+</AnchorPane>

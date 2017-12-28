@@ -1,8 +1,10 @@
 package Entities;
 
-import org.bson.Document;
+import Application.DatabaseConfig;
+import com.mongodb.client.DistinctIterable;
+import static com.mongodb.client.model.Filters.*;
 
-public class BuildingFloor implements DatabaseConnectivity {
+public class BuildingFloor{
 
     private String buildingNumber;
     private String buildingName;
@@ -10,38 +12,86 @@ public class BuildingFloor implements DatabaseConnectivity {
     private String GFA;
     private String UFA;
 
-    public BuildingFloor(String inputBuildingNumber, String inputBuildingName, String inputFloorNumber,
-                         String inputGFA, String inputUFA){
-        this.buildingNumber = inputBuildingNumber;
-        this.buildingName = inputBuildingName;
-        this.floorNumber = inputFloorNumber;
-        this.GFA = inputGFA;
-        this.UFA = inputUFA;
+    public BuildingFloor(String buildingNumber, String buildingName, String floorNumber,
+                         String GFA, String UFA){
+        this.buildingNumber = buildingNumber;
+        this.buildingName = buildingName;
+        this.floorNumber = floorNumber;
+        this.GFA = GFA;
+        this.UFA = UFA;
     }
 
-    public String writeRecordToDatabase() {
-
-        Document record = new Document();
-
-        record.put("BuildingNum",this.buildingNumber);
-        if(this.buildingName.length()!=0) record.put("BuildingName",this.buildingName);
-        record.put("FloorNum",this.floorNumber);
-        record.put("FloorGFA",this.GFA);
-        record.put("FloorUFA",this.UFA);
-
-        BuildingFloorsCollection.insertOne(record);
-
-        return "Successfully added details of Building number- "+buildingNumber+" Floor number- "+floorNumber;
+    public BuildingFloor(String buildingNumber, String floorNumber){
+        this.buildingNumber = buildingNumber;
+        this.floorNumber = floorNumber;
     }
 
-    public void readRecordFromDatabase() {
+    /*
+    *   NOTE: VERY VERY IMPORTANT
+    *       In order to make a POJO serializable in MongoDB, either
+    *           1) Public getter and setter methods should be defined for the object fields
+    *           2) Else fields should be declared public
+    *   REFER to http://mongodb.github.io/mongo-java-driver/3.6/bson/pojos/ if necessary
+    */
+
+    public String getBuildingNumber() {
+        return buildingNumber;
     }
 
-    public void modifyRecordInDatabase() {
+    public void setBuildingNumber(String buildingNumber) {
+        this.buildingNumber = buildingNumber;
+    }
+
+    public String getBuildingName() {
+        return buildingName;
+    }
+
+    public void setBuildingName(String buildingName) {
+        this.buildingName = buildingName;
+    }
+
+    public String getFloorNumber() {
+        return floorNumber;
+    }
+
+    public void setFloorNumber(String floorNumber) {
+        this.floorNumber = floorNumber;
+    }
+
+    public String getGFA() {
+        return GFA;
+    }
+
+    public void setGFA(String GFA) {
+        this.GFA = GFA;
+    }
+
+    public String getUFA() {
+        return UFA;
+    }
+
+    public void setUFA(String UFA) {
+        this.UFA = UFA;
+    }
+
+    public String writeToDatabase() {
+        DatabaseConfig.BUILDING_FLOORS_COLLECTION.insertOne(this);
+        return "Successfully added details of Building number- "+getBuildingNumber()+" Floor number- "+getFloorNumber();
+    }
+
+    public void readFromDatabase() {
+    }
+
+    public void modifyInDatabase() {
 
     }
 
-    public void deleteRecordInDatabase() {
+    public void deleteInDatabase() {
 
+    }
+
+    public static DistinctIterable<String> getDistinctBuildingFloor(String buildingNumber){
+        return DatabaseConfig.BUILDING_FLOORS_COLLECTION.distinct("floorNumber",
+                and(eq("buildingNumber",buildingNumber)),String.class);
     }
 }
