@@ -1,11 +1,8 @@
 package Forms;
 
-import Entities.Building;
-
 import Entities.BuildingFloor;
 import Entities.Space;
 import Entities.SpaceType;
-import com.mongodb.client.DistinctIterable;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,10 +14,10 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
+
 
 public class SpaceFormController implements Initializable {
 
@@ -49,7 +46,7 @@ public class SpaceFormController implements Initializable {
 
         // Listener for Building number choice box
         choiceBoxBuildingNum.valueProperty().addListener(((observable, oldValue, newValue) ->
-            getFloorNumbers()
+            FormBindings.bindFloorNumbers(choiceBoxFloorNum, choiceBoxBuildingNum.getValue())
         ));
 
         // Listener for Floor number choice box
@@ -57,39 +54,10 @@ public class SpaceFormController implements Initializable {
             txtFieldSpaceId.setText(choiceBoxFloorNum.getValue());
         }));
 
-        getBuildingNumbers();
+        FormBindings.bindBuildingNumbers(choiceBoxBuildingNum);
 
-        bindSpaceTypes();
+        FormBindings.bindSpaceType(choiceBoxSpaceType);
 
-    }
-
-    @FXML
-    void getBuildingNumbers(){
-        DistinctIterable<String> buildingNumbers =  Building.getDistinctBuildingNumber();
-        List<String> list = new ArrayList<>();
-        buildingNumbers.iterator().forEachRemaining(list::add);
-        for(String number: list){
-            choiceBoxBuildingNum.getItems().add(number);
-        }
-    }
-
-    @FXML
-    void getFloorNumbers(){
-        choiceBoxFloorNum.getItems().clear();
-        DistinctIterable<String> floorNumbers = BuildingFloor.getDistinctBuildingFloor(choiceBoxBuildingNum.getValue());
-        List<String> list = new ArrayList<>();
-        floorNumbers.iterator().forEachRemaining(list::add);
-        for(String number: list){
-            choiceBoxFloorNum.getItems().add(number);
-        }
-    }
-
-    @FXML
-    void bindSpaceTypes(){
-        choiceBoxSpaceType.getItems().clear();
-        for(SpaceType enumVal: SpaceType.values()){
-            choiceBoxSpaceType.getItems().add(enumVal);
-        }
     }
 
     @FXML
