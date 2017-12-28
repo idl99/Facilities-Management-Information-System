@@ -25,10 +25,8 @@ public class DatabaseConfig {
     public static final MongoDatabase DATABASE = CLIENT.getDatabase("Cw03Database").withCodecRegistry(POJO_CODEC_REGISTRY);
 
     public static final MongoCollection<Document> EMPLOYEES_COLLECTION = DATABASE.getCollection("Employees");
-    public static final MongoCollection<BuildingFloor> BUILDING_FLOORS_COLLECTION = DATABASE.getCollection("BuildingFloors",
-            BuildingFloor.class);
-    public  static final MongoCollection<Space> SPACES_COLLECTION = DATABASE.getCollection("Spaces",
-            Space.class);
+    public static final MongoCollection<Document> BUILDING_FLOORS_COLLECTION = DATABASE.getCollection("BuildingFloors");
+    public  static final MongoCollection<Document> SPACES_COLLECTION = DATABASE.getCollection("Spaces");
 
     private DatabaseConfig(){
 

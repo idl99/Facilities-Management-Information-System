@@ -1,16 +1,14 @@
 package Forms;
 
-import Entities.Building;
-
 import Entities.BuildingFloor;
+import Entities.Space;
 import Entities.SpaceType;
-import com.mongodb.client.DistinctIterable;
 
 import javafx.fxml.FXML;
-
 import javafx.scene.control.ChoiceBox;
 
 import java.util.Iterator;
+import java.util.List;
 
 
 public class FormBindings {
@@ -21,7 +19,7 @@ public class FormBindings {
 
     @FXML static void bindBuildingNumbers(ChoiceBox<String> choiceBox){
         choiceBox.getItems().clear();
-        DistinctIterable<String> buildingNumbers =  Building.getDistinctBuildingNumber();
+        List<String> buildingNumbers =  BuildingFloor.getDistinctBuildingNumber();
         Iterator<String> iterator =  buildingNumbers.iterator();
         while(iterator.hasNext()){
             choiceBox.getItems().add(iterator.next());
@@ -30,10 +28,18 @@ public class FormBindings {
 
     @FXML static void bindFloorNumbers(ChoiceBox<String> choiceBox, String buildingNumber){
         choiceBox.getItems().clear();
-        DistinctIterable<String> floorNumbers = BuildingFloor.getDistinctBuildingFloor(buildingNumber);
-        Iterator<String> iterator = floorNumbers.iterator();
-        while(iterator.hasNext()){
-            choiceBox.getItems().add(iterator.next());
+        List<String> listOfDistinctBuildingFloors = BuildingFloor.getDistinctBuildingFloor(buildingNumber);
+        for(String floor: listOfDistinctBuildingFloors){
+            choiceBox.getItems().add(floor);
+        }
+    }
+
+
+    @FXML static void bindSpaces(ChoiceBox<String> choiceBox, String buildingNumber){
+        choiceBox.getItems().clear();
+        List<Space> spaces = Space.getSpaceByBuildingNumber(buildingNumber);
+        for (Space space: spaces){
+            choiceBox.getItems().add(space.getSpaceId());
         }
     }
 

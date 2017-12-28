@@ -1,7 +1,12 @@
 package Entities;
 
 import Application.DatabaseConfig;
-import com.mongodb.client.DistinctIterable;
+import org.bson.Document;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import static com.mongodb.client.model.Filters.*;
 
 public class BuildingFloor{
@@ -20,19 +25,6 @@ public class BuildingFloor{
         this.GFA = GFA;
         this.UFA = UFA;
     }
-
-    public BuildingFloor(String buildingNumber, String floorNumber){
-        this.buildingNumber = buildingNumber;
-        this.floorNumber = floorNumber;
-    }
-
-    /*
-    *   NOTE: VERY VERY IMPORTANT
-    *       In order to make a POJO serializable in MongoDB, either
-    *           1) Public getter and setter methods should be defined for the object fields
-    *           2) Else fields should be declared public
-    *   REFER to http://mongodb.github.io/mongo-java-driver/3.6/bson/pojos/ if necessary
-    */
 
     public String getBuildingNumber() {
         return buildingNumber;
@@ -75,7 +67,17 @@ public class BuildingFloor{
     }
 
     public String writeToDatabase() {
-        DatabaseConfig.BUILDING_FLOORS_COLLECTION.insertOne(this);
+
+        Document record = new Document();
+
+        record.put("buildingNumber",this.buildingNumber);
+        if(this.buildingName.length()!=0) record.put("buildingName",this.buildingName);
+        record.put("floorNumber",this.floorNumber);
+        record.put("floorGFA",this.GFA);
+        record.put("floorUFA",this.UFA);
+
+        DatabaseConfig.BUILDING_FLOORS_COLLECTION.insertOne(record);
+
         return "Successfully added details of Building number- "+getBuildingNumber()+" Floor number- "+getFloorNumber();
     }
 
@@ -90,8 +92,19 @@ public class BuildingFloor{
 
     }
 
-    public static DistinctIterable<String> getDistinctBuildingFloor(String buildingNumber){
-        return DatabaseConfig.BUILDING_FLOORS_COLLECTION.distinct("floorNumber",
-                and(eq("buildingNumber",buildingNumber)),String.class);
+    public static List<String> getDistinctBuildingFloor(String buildingNumber){
+         Iterator<String> iterator = DatabaseConfig.BUILDING_FLOORS_COLLECTION.distinct("floorNumber",
+                and(eq("buildingNumber",buildingNumber)),String.class).iterator();
+         List<String> listOfDistinctBuildingFloor = new ArrayList<>();
+         iterator.forEachRemaining(listOfDistinctBuildingFloor::add);
+         return listOfDistinctBuildingFloor;
+    }
+
+    public static List<String> getDistinctBuildingNumber(){
+        Iterator<String > iterator = DatabaseConfig.BUILDING_FLOORS_COLLECTION.distinct(
+                "buildingNumber", String.class).iterator();
+        List<String> listOfDistinctBuildingNumber = new ArrayList<>();
+        iterator.forEachRemaining(listOfDistinctBuildingNumber::add);
+        return  listOfDistinctBuildingNumber;
     }
 }

@@ -63,7 +63,8 @@ public class SpaceFormController implements Initializable {
     @FXML
     void submitForm(ActionEvent event){
 
-        Space space = new Space(new BuildingFloor(choiceBoxBuildingNum.getValue(),choiceBoxFloorNum.getValue()),
+        Space space = new Space(choiceBoxBuildingNum.getValue(),
+                choiceBoxFloorNum.getValue(),
                 txtFieldSpaceId.getText(),
                 txtFieldSpaceName.getText(),
                 choiceBoxSpaceType.getValue(),

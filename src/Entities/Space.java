@@ -1,40 +1,57 @@
 package Entities;
 
 import Application.DatabaseConfig;
+import org.bson.Document;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import static com.mongodb.client.model.Filters.*;
 
 public class Space{
 
-    private BuildingFloor buildingFloorDetails;
-    private String id;
+    private String buildingNumber;
+    private String buildingFloorNumber;
+    private String spaceId;
     private String name;
     private SpaceType type;
     private String occupant_EmployeeId;
     private String occupyingDepartment;
 
-    public Space(BuildingFloor buildingFloorDetails, String id, String name, SpaceType type,
+    public Space(String buildingNumber, String buildingFloorNumber, String spaceId, String name, SpaceType type,
                  String empId, String department){
-        this.buildingFloorDetails = buildingFloorDetails;
-        this.id = id;
+        this.buildingNumber = buildingNumber;
+        this.buildingFloorNumber = buildingFloorNumber;
+        this.spaceId = spaceId;
         this.name = name;
         this.type = type;
         this.occupant_EmployeeId = empId;
         this.occupyingDepartment = department;
     }
 
-    public BuildingFloor getBuildingFloorDetails() {
-        return buildingFloorDetails;
+    public String getBuildingNumber() {
+        return buildingNumber;
     }
 
-    public void setBuildingFloorDetails(BuildingFloor buildingFloorDetails) {
-        this.buildingFloorDetails = buildingFloorDetails;
+    public void setBuildingNumber(String buildingNumber) {
+        this.buildingNumber = buildingNumber;
     }
 
-    public String getId() {
-        return id;
+    public String getBuildingFloorNumber() {
+        return buildingFloorNumber;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setBuildingFloorNumber(String buildingFloorNumber) {
+        this.buildingFloorNumber = buildingFloorNumber;
+    }
+
+    public String getSpaceId() {
+        return spaceId;
+    }
+
+    public void setSpaceId(String spaceId) {
+        this.spaceId = spaceId;
     }
 
     public String getName() {
@@ -70,8 +87,37 @@ public class Space{
     }
 
     public String writeToDatabase(){
-        DatabaseConfig.SPACES_COLLECTION.insertOne(this);
-        return "Successfully added Space Id - "+this.id+" to Spaces Database.";
+        Document record = new Document();
+
+        record.put("buildingNumber",this.buildingNumber);
+        record.put("buildingFloorNumber",this.buildingFloorNumber);
+        record.put("spaceId",this.spaceId);
+        record.put("name",this.name);
+        record.put("type",this.type.name());
+        record.put("occupant",this.occupant_EmployeeId);
+        record.put("department",this.occupyingDepartment);
+
+
+        DatabaseConfig.SPACES_COLLECTION.insertOne(record);
+        return "Successfully added Space Id - "+this.spaceId +" to Spaces Database.";
+    }
+
+    public static List<Space> getSpaceByBuildingNumber(String buildingNumber){
+        Iterator<Document> iterator = DatabaseConfig.SPACES_COLLECTION.find(
+                eq("buildingNumber",buildingNumber),Document.class).iterator();
+        List<Space> listOfSpaces = new ArrayList<>();
+        while (iterator.hasNext()){
+            Document space = iterator.next();
+            listOfSpaces.add(new Space(space.getString("buildingNumber"),
+                    space.getString("buildingFloorNumber"),
+                    space.getString("spaceId"),
+                    space.getString("name"),
+                    SpaceType.valueOf(space.getString("type")),
+                    space.getString("occupant"),
+                    space.getString("department")));
+
+        }
+        return listOfSpaces;
     }
 
 }
