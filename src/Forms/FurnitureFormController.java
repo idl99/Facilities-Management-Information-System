@@ -1,11 +1,14 @@
 package Forms;
 
+import Entities.Furniture.*;
+import Entities.Space.Space;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Accordion;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TitledPane;
+import javafx.scene.control.*;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class FurnitureFormController {
 
@@ -22,13 +25,13 @@ public class FurnitureFormController {
     private TextField txtFieldKeyNum;
 
     @FXML
-    private ChoiceBox<?> choiceBoxItem;
+    private ChoiceBox<FurnitureItemType> choiceBoxItemType;
 
     @FXML
-    private ChoiceBox<?> choiceBoxMaterial;
+    private ChoiceBox<FurnitureItemMaterial> choiceBoxMaterial;
 
     @FXML
-    private ChoiceBox<?> choiceBoxStatus;
+    private ChoiceBox<FurnitureItemStatus> choiceBoxStatus;
 
     @FXML
     private TitledPane paneLocationDetails;
@@ -53,16 +56,39 @@ public class FurnitureFormController {
 
 
     @FXML void submitForm(ActionEvent event) {
-
+        try {
+            FurnitureItem record = new FurnitureItem.FurnitureItemBuilder(
+                    txtFieldBarcode.getText(), txtFieldKeyNum.getText(), choiceBoxItemType.getValue(),
+                    choiceBoxMaterial.getValue(),choiceBoxStatus.getValue()
+            ).locatedAt(
+                    new Space(choiceBoxBuilding.getValue(),choiceBoxSpace.getValue())
+            ).purchaseDetails(
+                    new FurnitureItemPurchase(txtFieldSupplier.getText(),
+                            new SimpleDateFormat("dd/MM/yyyy").parse(txtFieldDate.getText()),
+                            Integer.parseInt(txtFieldCost.getText()))
+            ).build();
+            record.writeToDatabase();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void initialize() {
         accordionDetails.setExpandedPane(paneItemDetails);
+
+        FormBindings.bindFurnitureItemType(choiceBoxItemType);
+        FormBindings.bindFurnitureItemStatus(choiceBoxStatus);
+        FormBindings.bindBuildingNumbers(choiceBoxBuilding);
+
+        choiceBoxItemType.valueProperty().addListener(((observable, oldValue, newValue) -> {
+            FormBindings.bindFurnitureItemMaterial(choiceBoxMaterial, choiceBoxItemType.getValue());
+        }));
+
         choiceBoxBuilding.valueProperty().addListener(((observable, oldValue, newValue) -> {
             FormBindings.bindSpaces(choiceBoxSpace,choiceBoxBuilding.getValue());
         }));
-        FormBindings.bindBuildingNumbers(choiceBoxBuilding);
+
     }
 
 }

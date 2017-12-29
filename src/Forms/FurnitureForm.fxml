@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="Content" minHeight="0.0" minWidth="0.0" prefHeight="520.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Forms.FurnitureFormController">
   <children>
     <Label alignment="CENTER" layoutX="120.0" layoutY="50.0" prefHeight="30.0" prefWidth="360.0" style="-fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, white;&#10;-fx-background-radius: 5px, 5px, 4px, 3px;&#10;-fx-background-insets: 0px 0px -1px 0px, 0px, 1px, 2px;" text="INSERT FURNITURE ITEM DETAILS">
@@ -27,10 +26,10 @@
                   <TextField fx:id="txtFieldBarcode" layoutX="160.0" layoutY="20.0" prefWidth="250.0" />
                   <Label alignment="CENTER_RIGHT" layoutX="24.0" layoutY="64.0" prefWidth="117.0" text="Key Number:" />
                   <TextField fx:id="txtFieldKeyNum" layoutX="160.0" layoutY="60.0" prefHeight="26.0" prefWidth="100.0" />
-                  <Label alignment="CENTER_RIGHT" layoutX="24.0" layoutY="106.0" prefWidth="117.0" text="Item:" />
+                  <Label alignment="CENTER_RIGHT" layoutX="24.0" layoutY="106.0" prefWidth="117.0" text="Type:" />
                   <Label alignment="CENTER_RIGHT" layoutX="24.0" layoutY="144.0" prefWidth="117.0" text="Material:" />
                   <Label alignment="CENTER_RIGHT" layoutX="24.0" layoutY="184.0" prefWidth="117.0" text="Current Status:" />
-                        <ChoiceBox fx:id="choiceBoxItem" layoutX="160.0" layoutY="102.0" prefWidth="150.0" />
+                        <ChoiceBox fx:id="choiceBoxItemType" layoutX="160.0" layoutY="102.0" prefWidth="150.0" />
                         <ChoiceBox fx:id="choiceBoxMaterial" layoutX="160.0" layoutY="140.0" prefWidth="150.0" />
                         <ChoiceBox fx:id="choiceBoxStatus" layoutX="160.0" layoutY="180.0" prefHeight="26.0" prefWidth="100.0" />
                      </children>
@@ -57,7 +56,7 @@
                   <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="65.0" prefHeight="18.0" prefWidth="90.0" text="Purchase Date:" />
                   <Label alignment="CENTER" layoutX="15.0" layoutY="100.0" prefHeight="18.0" prefWidth="90.0" text="Purchase Cost:" />
                   <TextField fx:id="txtFieldSupplier" layoutX="131.0" layoutY="26.0" prefWidth="250.0" />
-                  <TextField fx:id="txtFieldDate" layoutX="131.0" layoutY="61.0" prefWidth="250.0" />
+                  <TextField fx:id="txtFieldDate" layoutX="131.0" layoutY="61.0" prefWidth="250.0" promptText="Enter date in dd/MM/YYYY" />
                         <TextField fx:id="txtFieldCost" layoutX="131.0" layoutY="96.0" prefWidth="250.0" />
                      </children>
                   </AnchorPane>

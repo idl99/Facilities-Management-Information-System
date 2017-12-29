@@ -1,8 +1,7 @@
 package Forms;
 
-import Entities.BuildingFloor;
-import Entities.Space;
-import Entities.SpaceType;
+import Entities.Space.Space;
+import Entities.Space.SpaceType;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

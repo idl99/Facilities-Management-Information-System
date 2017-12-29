@@ -1,8 +1,6 @@
 package Application;
 
-import Entities.BuildingFloor;
-
-import Entities.Space;
+import Entities.Furniture.FurnitureItem;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -26,7 +24,8 @@ public class DatabaseConfig {
 
     public static final MongoCollection<Document> EMPLOYEES_COLLECTION = DATABASE.getCollection("Employees");
     public static final MongoCollection<Document> BUILDING_FLOORS_COLLECTION = DATABASE.getCollection("BuildingFloors");
-    public  static final MongoCollection<Document> SPACES_COLLECTION = DATABASE.getCollection("Spaces");
+    public static final MongoCollection<Document> SPACES_COLLECTION = DATABASE.getCollection("Spaces");
+    public static final MongoCollection<FurnitureItem> FURNITURE_ITEM_MONGO_COLLECTION = DATABASE.getCollection("FurnitureItems",FurnitureItem.class);
 
     private DatabaseConfig(){
 
