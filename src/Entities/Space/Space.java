@@ -1,4 +1,4 @@
-package Entities;
+package Entities.Space;
 
 import Application.DatabaseConfig;
 import org.bson.Document;
@@ -28,6 +28,11 @@ public class Space{
         this.type = type;
         this.occupant_EmployeeId = empId;
         this.occupyingDepartment = department;
+    }
+
+    public Space(String buildingNumber, String spaceId){
+        this.buildingNumber = buildingNumber;
+        this.spaceId = spaceId;
     }
 
     public String getBuildingNumber() {
