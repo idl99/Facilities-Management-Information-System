@@ -25,6 +25,11 @@ public class FMD_MenuOptionsController {
     }
 
     @FXML
+    void modifyFurnitureItem(ActionEvent event){
+        newFormWindow("/Forms/ModifyFurnitureForm.fxml");
+    }
+
+    @FXML
     void initialize() {
 
     }

@@ -57,16 +57,14 @@ public class FurnitureFormController {
 
     @FXML void submitForm(ActionEvent event) {
         try {
-            FurnitureItem record = new FurnitureItem.FurnitureItemBuilder(
+            FurnitureItem record = new FurnitureItem(
                     txtFieldBarcode.getText(), txtFieldKeyNum.getText(), choiceBoxItemType.getValue(),
-                    choiceBoxMaterial.getValue(),choiceBoxStatus.getValue()
-            ).locatedAt(
-                    new Space(choiceBoxBuilding.getValue(),choiceBoxSpace.getValue())
-            ).purchaseDetails(
+                    choiceBoxMaterial.getValue(),choiceBoxStatus.getValue(),
+                    new Space(choiceBoxBuilding.getValue(),choiceBoxSpace.getValue()),
                     new FurnitureItemPurchase(txtFieldSupplier.getText(),
                             new SimpleDateFormat("dd/MM/yyyy").parse(txtFieldDate.getText()),
                             Integer.parseInt(txtFieldCost.getText()))
-            ).build();
+            );
             record.writeToDatabase();
         } catch (ParseException e) {
             e.printStackTrace();

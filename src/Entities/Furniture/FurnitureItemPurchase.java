@@ -1,12 +1,19 @@
 package Entities.Furniture;
 
+import org.mongodb.morphia.annotations.Embedded;
+
 import java.util.Date;
 
+@Embedded
 public class FurnitureItemPurchase{
 
     private String supplier;
     private Date date;
     private int cost;
+
+    public FurnitureItemPurchase(){
+
+    }
 
     public FurnitureItemPurchase(String supplier,Date date, int cost){
         this.supplier = supplier;

@@ -1,23 +1,27 @@
 package Entities.Space;
 
-import Application.DatabaseConfig;
-import org.bson.Document;
+import Application.Main;
+import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-import static com.mongodb.client.model.Filters.*;
-
+@Embedded
+@Entity("spaces")
 public class Space{
 
     private String buildingNumber;
     private String buildingFloorNumber;
-    private String spaceId;
+    @Id private String spaceId;
     private String name;
     private SpaceType type;
     private String occupant_EmployeeId;
     private String occupyingDepartment;
+
+    public Space(){
+
+    }
 
     public Space(String buildingNumber, String buildingFloorNumber, String spaceId, String name, SpaceType type,
                  String empId, String department){
@@ -92,37 +96,12 @@ public class Space{
     }
 
     public String writeToDatabase(){
-        Document record = new Document();
-
-        record.put("buildingNumber",this.buildingNumber);
-        record.put("buildingFloorNumber",this.buildingFloorNumber);
-        record.put("spaceId",this.spaceId);
-        record.put("name",this.name);
-        record.put("type",this.type.name());
-        record.put("occupant",this.occupant_EmployeeId);
-        record.put("department",this.occupyingDepartment);
-
-
-        DatabaseConfig.SPACES_COLLECTION.insertOne(record);
+        Main.datastore.save(this);
         return "Successfully added Space Id - "+this.spaceId +" to Spaces Database.";
     }
 
     public static List<Space> getSpaceByBuildingNumber(String buildingNumber){
-        Iterator<Document> iterator = DatabaseConfig.SPACES_COLLECTION.find(
-                eq("buildingNumber",buildingNumber),Document.class).iterator();
-        List<Space> listOfSpaces = new ArrayList<>();
-        while (iterator.hasNext()){
-            Document space = iterator.next();
-            listOfSpaces.add(new Space(space.getString("buildingNumber"),
-                    space.getString("buildingFloorNumber"),
-                    space.getString("spaceId"),
-                    space.getString("name"),
-                    SpaceType.valueOf(space.getString("type")),
-                    space.getString("occupant"),
-                    space.getString("department")));
-
-        }
-        return listOfSpaces;
+        return Main.datastore.createQuery(Space.class).field("buildingNumber").equal(buildingNumber).asList();
     }
 
 }

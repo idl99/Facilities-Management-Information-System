@@ -1,33 +1,42 @@
 package Entities.Furniture;
 
-import Application.DatabaseConfig;
+import Application.Main;
 import Entities.Space.Space;
-import org.bson.Document;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Reference;
+import org.mongodb.morphia.query.Query;
 
-import static com.mongodb.client.model.Filters.and;
-import static com.mongodb.client.model.Filters.eq;
+import java.util.List;
 
+@Entity("furnitureItems")
 public class FurnitureItem{
 
+    @Id
     private String barcode;
     private String keyNumber;
     private FurnitureItemType itemType;
     private FurnitureItemMaterial material;
     private FurnitureItemStatus status;
 
+    @Reference("spaces")
     private Space location;
     private FurnitureItemPurchase purchase;
 
-    public FurnitureItem(FurnitureItemBuilder builder){
+    public FurnitureItem(){
 
-        this.barcode = builder.barcode;
-        this.keyNumber = builder.keyNumber;
-        this.itemType = builder.itemType;
-        this.material = builder.material;
-        this.status = builder.status;
+    }
 
-        this.location = builder.location;
-        this.purchase = builder.purchase;
+    public FurnitureItem(String barcode, String keyNumber, FurnitureItemType type,
+                         FurnitureItemMaterial material, FurnitureItemStatus status,
+                         Space location, FurnitureItemPurchase purchase){
+        this.barcode = barcode;
+        this.keyNumber = keyNumber;
+        this.itemType = type;
+        this.material = material;
+        this.status = status;
+        this.location = location;
+        this.purchase = purchase;
     }
 
     public String getBarcode() {
@@ -87,64 +96,14 @@ public class FurnitureItem{
     }
 
     public void writeToDatabase(){
-        DatabaseConfig.FURNITURE_ITEM_MONGO_COLLECTION.insertOne(this);
+//        DatabaseConfig.FURNITURE_ITEM_MONGO_COLLECTION.insertOne(this);
+        Main.datastore.save(this);
     }
 
-    public FurnitureItem dbRecordToPojo(Document record){
-        return new FurnitureItem.FurnitureItemBuilder(
-                record.getString("barcode"),
-                record.getString("keyNumber"),
-                FurnitureItemType.valueOf(record.getString("itemType")),
-                FurnitureItemMaterial.valueOf(record.getString("material")),
-                FurnitureItemStatus.valueOf(record.getString("status"))
-        ).locatedAt(new Space(
-                record.getString("location.buildingNumber"),
-                record.getString("location.spaceId")
-        )).purchaseDetails(new FurnitureItemPurchase(
-                record.getString("purchase.supplier"),
-                record.getDate("purchase.date"),
-                record.getInteger("purchase.cost")
-        )).build();
+    public static FurnitureItem getFurnitureByBarcode(String barcode){
+        final Query<FurnitureItem> query = Main.datastore.createQuery(FurnitureItem.class);
+        final List<FurnitureItem> items = query.asList();
+        return items.get(0);
     }
 
-    public FurnitureItem getByBuildingSpace(String buildingNumber, String spaceId){
-        Document record = DatabaseConfig.FURNITURE_ITEM_MONGO_COLLECTION.find(and(eq("buildingNumber",buildingNumber),
-                eq("spaceId",spaceId)),Document.class).iterator().next();
-        return dbRecordToPojo(record);
-    }
-
-    public static class FurnitureItemBuilder{
-        private String barcode;
-        private String keyNumber;
-        private FurnitureItemType itemType;
-        private FurnitureItemMaterial material;
-        private FurnitureItemStatus status;
-
-        private Space location;
-        private FurnitureItemPurchase purchase;
-
-        public FurnitureItemBuilder(String barcode, String keyNumber, FurnitureItemType itemType,
-                                    FurnitureItemMaterial material, FurnitureItemStatus status){
-            this.barcode = barcode;
-            this.keyNumber = keyNumber;
-            this.itemType = itemType;
-            this.material = material;
-            this.status = status;
-        }
-
-        public FurnitureItemBuilder locatedAt(Space location){
-            this.location = location;
-            return this;
-        }
-
-        public FurnitureItemBuilder purchaseDetails(FurnitureItemPurchase purchase){
-            this.purchase = purchase;
-            return this;
-        }
-
-        public FurnitureItem build(){
-            return new FurnitureItem(this);
-        }
-
-    }
 }
