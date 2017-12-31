@@ -1,6 +1,5 @@
 package Forms;
 
-import Application.DatabaseConfig;
 import Entities.BuildingFloor;
 import javafx.fxml.FXML;
 
@@ -38,6 +37,7 @@ public class FloorFormController{
                 txtFieldFloorUFA.getText());
 
         String response = record.writeToDatabase();
+
         iconSuccess.setVisible(true);
         lblSuccessMsg.setText(response+". You may continue to add details of a new building floor above," +
                 "or close this window");

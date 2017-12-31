@@ -1,11 +1,12 @@
 package Entities.Space;
 
-import Application.Main;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
 import java.util.List;
+
+import static Application.Main.morphia;
 
 @Embedded
 @Entity("spaces")
@@ -96,12 +97,14 @@ public class Space{
     }
 
     public String writeToDatabase(){
-        Main.datastore.save(this);
+        morphia.getDatastore().save(this);
         return "Successfully added Space Id - "+this.spaceId +" to Spaces Database.";
     }
 
     public static List<Space> getSpaceByBuildingNumber(String buildingNumber){
-        return Main.datastore.createQuery(Space.class).field("buildingNumber").equal(buildingNumber).asList();
+        return morphia.getDatastore().createQuery(Space.class).
+                field("buildingNumber").equal(buildingNumber).
+                asList();
     }
 
 }

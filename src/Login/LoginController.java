@@ -7,14 +7,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import org.bson.Document;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
 
-    private Login login;
+    private Employee user;
 
     @FXML private TextField txtFieldEmployeeId;
     @FXML private PasswordField txtFieldPassword;
@@ -23,26 +22,18 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        //Instantiating the login model
-        login = new Login();
-
         //Adding listeners to text fields
-        txtFieldEmployeeId.textProperty().addListener((observable, oldValue, newValue) ->
-                login.setLoginId(newValue));
+        /*txtFieldEmployeeId.textProperty().addListener((observable, oldValue, newValue) ->
+                user.setEmployeeId(newValue));
         txtFieldPassword.textProperty().addListener(((observable, oldValue, newValue) ->
-                login.setLoginPassword(newValue)));
+                user.setPassword(newValue)));*/
     }
 
     @FXML
     void login(ActionEvent event) {
         try{
-            Document response = login.authenticate();
-            SessionController sessionController = new SessionController(
-                    response.getString("EmpId"),
-                    response.getString("EmpName"),
-                    response.getString("EmpRole")
-            );
+            new SessionController(Employee.login(txtFieldEmployeeId.getText(),
+                    txtFieldPassword.getText()));
         } catch (Exception e){
             e.printStackTrace();
             iconError.setVisible(true);

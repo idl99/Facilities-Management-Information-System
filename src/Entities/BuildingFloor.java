@@ -1,29 +1,47 @@
 package Entities;
 
-import Application.DatabaseConfig;
 import org.bson.Document;
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import static com.mongodb.client.model.Filters.*;
+import static Application.Main.morphia;
 
+@Entity("buildingFloors")
 public class BuildingFloor{
 
+    @Id
+    private ObjectId id;
     private String buildingNumber;
     private String buildingName;
     private String floorNumber;
     private String GFA;
     private String UFA;
 
+    public BuildingFloor(){
+
+    }
+
     public BuildingFloor(String buildingNumber, String buildingName, String floorNumber,
                          String GFA, String UFA){
+        this.id = ObjectId.get();
         this.buildingNumber = buildingNumber;
         this.buildingName = buildingName;
         this.floorNumber = floorNumber;
         this.GFA = GFA;
         this.UFA = UFA;
+    }
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
     }
 
     public String getBuildingNumber() {
@@ -67,44 +85,25 @@ public class BuildingFloor{
     }
 
     public String writeToDatabase() {
-
-        Document record = new Document();
-
-        record.put("buildingNumber",this.buildingNumber);
-        if(this.buildingName.length()!=0) record.put("buildingName",this.buildingName);
-        record.put("floorNumber",this.floorNumber);
-        record.put("floorGFA",this.GFA);
-        record.put("floorUFA",this.UFA);
-
-        DatabaseConfig.BUILDING_FLOORS_COLLECTION.insertOne(record);
-
+        morphia.getDatastore().save(this);
         return "Successfully added details of Building number- "+getBuildingNumber()+" Floor number- "+getFloorNumber();
     }
 
-    public void readFromDatabase() {
+    public static List<String> distinctBuildingNumber(){
+        Iterator<Document> iterator = morphia.getDatastore().createAggregation(BuildingFloor.class)
+                .group("buildingNumber")
+                .aggregate(Document.class);
+        List<String> list = new ArrayList<>();
+
+        while (iterator.hasNext()) list.add(iterator.next().getString("_id"));
+
+        return list;
     }
 
-    public void modifyInDatabase() {
-
+    public static List<String> distinctFloorNumber(String buildingNumber){
+        // TO BE COMPLETED
+        return new ArrayList<String>();
     }
 
-    public void deleteInDatabase() {
 
-    }
-
-    public static List<String> getDistinctBuildingFloor(String buildingNumber){
-         Iterator<String> iterator = DatabaseConfig.BUILDING_FLOORS_COLLECTION.distinct("floorNumber",
-                and(eq("buildingNumber",buildingNumber)),String.class).iterator();
-         List<String> listOfDistinctBuildingFloor = new ArrayList<>();
-         iterator.forEachRemaining(listOfDistinctBuildingFloor::add);
-         return listOfDistinctBuildingFloor;
-    }
-
-    public static List<String> getDistinctBuildingNumber(){
-        Iterator<String > iterator = DatabaseConfig.BUILDING_FLOORS_COLLECTION.distinct(
-                "buildingNumber", String.class).iterator();
-        List<String> listOfDistinctBuildingNumber = new ArrayList<>();
-        iterator.forEachRemaining(listOfDistinctBuildingNumber::add);
-        return  listOfDistinctBuildingNumber;
-    }
 }

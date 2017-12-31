@@ -10,7 +10,6 @@ import Entities.Space.SpaceType;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 
-import java.util.Iterator;
 import java.util.List;
 
 
@@ -22,19 +21,12 @@ public class FormBindings {
 
     @FXML static void bindBuildingNumbers(ChoiceBox<String> choiceBox){
         choiceBox.getItems().clear();
-        List<String> buildingNumbers =  BuildingFloor.getDistinctBuildingNumber();
-        Iterator<String> iterator =  buildingNumbers.iterator();
-        while(iterator.hasNext()){
-            choiceBox.getItems().add(iterator.next());
-        }
+        List<String> list =  BuildingFloor.distinctBuildingNumber();
+        for(String number: list) choiceBox.getItems().add(number);
     }
 
     @FXML static void bindFloorNumbers(ChoiceBox<String> choiceBox, String buildingNumber){
-        choiceBox.getItems().clear();
-        List<String> listOfDistinctBuildingFloors = BuildingFloor.getDistinctBuildingFloor(buildingNumber);
-        for(String floor: listOfDistinctBuildingFloors){
-            choiceBox.getItems().add(floor);
-        }
+        // TO BE COMPLETED
     }
 
 

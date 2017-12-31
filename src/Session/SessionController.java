@@ -1,6 +1,7 @@
 package Session;
 
 import Application.Main;
+import Login.Employee;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -17,9 +18,7 @@ import java.util.ResourceBundle;
 
 public class SessionController implements Initializable{
 
-    public String userId;
-    public String userName;
-    public String userRole;
+    public Employee sessionUser;
 
     @FXML private AnchorPane content;
     @FXML private Label lblSessionUser;
@@ -27,11 +26,8 @@ public class SessionController implements Initializable{
     @FXML private Button btnLogout;
 
 
-    public SessionController(String empId, String empName, String empRole) throws Exception{
-        // Set model properties
-        userId = empId;
-        userName = empName;
-        userRole = empRole;
+    public SessionController(Employee sessionUser) throws Exception{
+        this.sessionUser = sessionUser;
         // Load view
         FXMLLoader fxml = new FXMLLoader(getClass().getResource("/Session/SessionView.fxml"));
         fxml.setController(this);
@@ -40,18 +36,18 @@ public class SessionController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        lblSessionUser.setText(userName.toUpperCase());
-        lblMenuHeader.setText(userRole +" Staff Main Menu");
+        lblSessionUser.setText(sessionUser.getName().toUpperCase());
+        lblMenuHeader.setText(sessionUser.getRole() +" Staff Main Menu");
         showMenuOptions();
     }
 
     public void showMenuOptions(){
         Pane options=null;
         try {
-            if (userRole.equals("FMD")){
+            if (sessionUser.getRole().equals("FMD")){
                 options = FXMLLoader.load(getClass().getResource("/Session/FMD_MenuOptions.fxml"));
             }
-            else if(userRole.equals("Normal")){
+            else if(sessionUser.getRole().equals("Normal")){
                 options = FXMLLoader.load(getClass().getResource("/Session/NormalStaff_MenuOptions.fxml"));
             }
             content.getChildren().add(options);

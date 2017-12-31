@@ -1,13 +1,15 @@
 package Entities.Furniture;
 
-import Application.Main;
 import Entities.Space.Space;
+
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Reference;
 import org.mongodb.morphia.query.Query;
 
 import java.util.List;
+
+import static Application.Main.morphia;
 
 @Entity("furnitureItems")
 public class FurnitureItem{
@@ -97,11 +99,11 @@ public class FurnitureItem{
 
     public void writeToDatabase(){
 //        DatabaseConfig.FURNITURE_ITEM_MONGO_COLLECTION.insertOne(this);
-        Main.datastore.save(this);
+        morphia.getDatastore().save(this);
     }
 
     public static FurnitureItem getFurnitureByBarcode(String barcode){
-        final Query<FurnitureItem> query = Main.datastore.createQuery(FurnitureItem.class);
+        final Query<FurnitureItem> query = morphia.getDatastore().createQuery(FurnitureItem.class);
         final List<FurnitureItem> items = query.asList();
         return items.get(0);
     }
