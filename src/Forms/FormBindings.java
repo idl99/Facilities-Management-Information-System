@@ -26,7 +26,9 @@ public class FormBindings {
     }
 
     @FXML static void bindFloorNumbers(ChoiceBox<String> choiceBox, String buildingNumber){
-        // TO BE COMPLETED
+        choiceBox.getItems().clear();
+        List<String> list = BuildingFloor.distinctFloorNumber(buildingNumber);
+        for(String number: list) choiceBox.getItems().add(number);
     }
 
 
