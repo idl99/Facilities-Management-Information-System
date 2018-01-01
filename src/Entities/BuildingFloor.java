@@ -4,6 +4,7 @@ import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.query.Sort;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -91,6 +92,7 @@ public class BuildingFloor{
 
     public static List<String> distinctBuildingNumber(){
         Iterator<Document> iterator = morphia.getDatastore().createAggregation(BuildingFloor.class)
+                .sort(Sort.descending("buildingNumber"))
                 .group("buildingNumber")
                 .aggregate(Document.class);
         List<String> list = new ArrayList<>();
@@ -101,8 +103,17 @@ public class BuildingFloor{
     }
 
     public static List<String> distinctFloorNumber(String buildingNumber){
-        // TO BE COMPLETED
-        return new ArrayList<String>();
+        Iterator<Document> iterator = morphia.getDatastore().createAggregation(BuildingFloor.class)
+                .match(morphia.getDatastore().createQuery(BuildingFloor.class).
+                        field("buildingNumber").equal(buildingNumber))
+                .sort(Sort.descending("floorNumber"))
+                .group("floorNumber")
+                .aggregate(Document.class);
+        List<String> list = new ArrayList<>();
+
+        while (iterator.hasNext()) list.add(iterator.next().getString("_id"));
+
+        return list;
     }
 
 
