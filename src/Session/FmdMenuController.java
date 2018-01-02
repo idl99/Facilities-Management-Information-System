@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class FMD_MenuOptionsController {
+public class FmdMenuController {
     @FXML
     void recordFloorDetails(ActionEvent event) {
         newFormWindow("/Forms/FloorForm.fxml");

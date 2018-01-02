@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 
 public class SessionController implements Initializable{
 
-    public Employee sessionUser;
+    public static Employee sessionUser;
 
     @FXML private AnchorPane content;
     @FXML private Label lblSessionUser;
@@ -45,10 +45,10 @@ public class SessionController implements Initializable{
         Pane options=null;
         try {
             if (sessionUser.getRole().equals("FMD")){
-                options = FXMLLoader.load(getClass().getResource("/Session/FMD_MenuOptions.fxml"));
+                options = FXMLLoader.load(getClass().getResource("/Session/FmdMenu.fxml"));
             }
             else if(sessionUser.getRole().equals("Normal")){
-                options = FXMLLoader.load(getClass().getResource("/Session/NormalStaff_MenuOptions.fxml"));
+                options = FXMLLoader.load(getClass().getResource("/Session/StaffMenu.fxml"));
             }
             content.getChildren().add(options);
             options.setLayoutX(176);

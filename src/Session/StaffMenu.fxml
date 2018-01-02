@@ -7,8 +7,8 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="450.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
-  <Button layoutX="75.0" layoutY="120.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="300.0" style="" text="MAKE RELOCATION REQUEST">
+<AnchorPane fx:controller="Session.StaffMenuController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="450.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <Button layoutX="75.0" layoutY="120.0" mnemonicParsing="false" onAction="#makeRelocationRequest" prefHeight="40.0" prefWidth="300.0" style="" text="MAKE RELOCATION REQUEST">
     <font>
       <Font name="System Bold" size="14.0" fx:id="x1" />
     </font>
