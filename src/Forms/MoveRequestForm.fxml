@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Forms.MoveRequestController">
+   <children>
+      <Label alignment="CENTER" layoutX="45.0" layoutY="30.0" prefHeight="30.0" prefWidth="360.0" style="-fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, white;&#10;-fx-background-radius: 5px, 5px, 4px, 3px;&#10;-fx-background-insets: 0px 0px -1px 0px, 0px, 1px, 2px;" text="RELOCATION REQUEST FORM">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER_RIGHT" layoutX="45.0" layoutY="130.0" prefHeight="20.0" prefWidth="110.0" text="Move to  Space:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="choiceBoxBuilding" layoutX="175.0" layoutY="87.0" prefWidth="60.0" />
+      <Label alignment="CENTER_RIGHT" layoutX="45.0" layoutY="170.0" prefHeight="20.0" prefWidth="110.0" text="Date:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="choiceBoxSpace" layoutX="175.0" layoutY="127.0" prefWidth="75.0" />
+      <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="45.0" layoutY="90.0" text="Move to Building:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtFieldDate" layoutX="176.0" layoutY="168.0" prefHeight="26.0" prefWidth="125.0" />
+      <Label alignment="CENTER_RIGHT" layoutX="45.0" layoutY="210.0" prefHeight="20.0" prefWidth="110.0" text="Comments:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="txtFieldComments" layoutX="175.0" layoutY="210.0" prefHeight="125.0" prefWidth="220.0" />
+      <Button layoutX="235.0" layoutY="350.0" mnemonicParsing="false" onAction="#submitForm" prefHeight="28.0" prefWidth="100.0" text="Submit" />
+   </children>
+</AnchorPane>

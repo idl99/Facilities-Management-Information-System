@@ -40,6 +40,16 @@ public class FormBindings {
         }
     }
 
+    @FXML static void bindSpacesBySpaceType(ChoiceBox<String> choiceBox, String buildingNumber,
+                                            SpaceType spaceType){
+        choiceBox.getItems().clear();
+        List<Space> spaces = Space.getSpaceByBuildingNumber(buildingNumber);
+        for (Space space: spaces){
+            if(space.getType() == spaceType)
+                choiceBox.getItems().add(space.getSpaceId());
+        }
+    }
+
     @FXML static void bindSpaceType(ChoiceBox<SpaceType> choiceBox){
         choiceBox.getItems().clear();
         for(SpaceType enumVal: SpaceType.values()){
