@@ -5,7 +5,10 @@ import Entities.Space.Space;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -83,6 +86,10 @@ public class FurnitureFormController {
                             Integer.parseInt(txtFieldCost.getText()))
             );
             record.writeToDatabase();
+
+            Stage stage = (Stage)((Node)(event.getSource())).getScene().getWindow();
+            stage.close();
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
