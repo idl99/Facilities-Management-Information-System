@@ -45,6 +45,14 @@ public class MoveRequest{
         this.requestId = requestId;
     }
 
+    public Employee getRequestedBy() {
+        return requestedBy;
+    }
+
+    public void setRequestedBy(Employee requestedBy) {
+        this.requestedBy = requestedBy;
+    }
+
     public Space getMoveTo() {
         return moveTo;
     }
@@ -76,7 +84,7 @@ public class MoveRequest{
     @PostPersist
     void showMessageDialog(){
         MessageDialog dialog = new MessageDialog.MessageDialogBuilder().
-                withHeader("Successfully inserted record into Furniture Items' Database").
+                withHeader("Successfully made Relocation Request  ").
                 withContentText("Successfully made Relocation Request (Request Id) "+
                         this.requestId+". Please check in back later for approval status").
                 withGraphic(new Image("/Graphics/Sucess_Icon.png")).
