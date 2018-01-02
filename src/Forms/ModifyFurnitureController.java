@@ -39,30 +39,59 @@ public class ModifyFurnitureController implements Initializable {
     @FXML
     private ChoiceBox<String> choiceBoxSpace;
 
+    private FurnitureItem itemToModify;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
 
     @FXML
     void searchFurnitureItem(ActionEvent event) {
-        FurnitureItem item = FurnitureItem.getFurnitureByBarcode(txtFieldBarcode.getText());
-        txtFieldBarcode.setText(item.getBarcode());
-        txtFieldKeyNum.setText(item.getKeyNumber());
+        itemToModify = FurnitureItem.getFurnitureByBarcode(txtFieldBarcode.getText());
 
-        choiceBoxStatus.getItems().add(item.getStatus());
-        choiceBoxStatus.setValue(item.getStatus());
+        txtFieldBarcode.setText(itemToModify.getBarcode());
 
-        choiceBoxBuilding.getItems().add(item.getLocation().getBuildingNumber());
-        choiceBoxBuilding.setValue(item.getLocation().getBuildingNumber());
+        txtFieldKeyNum.setText(itemToModify.getKeyNumber());
 
-        choiceBoxSpace.getItems().add(item.getLocation().getSpaceId());
-        choiceBoxSpace.setValue(item.getLocation().getSpaceId());
+        FormBindings.bindFurnitureItemStatus(choiceBoxStatus);
+        choiceBoxStatus.setValue(itemToModify.getStatus());
+
+        FormBindings.bindBuildingNumbers(choiceBoxBuilding);
+        choiceBoxBuilding.setValue(itemToModify.getLocation().getBuildingNumber());
+
+        FormBindings.bindSpaces(choiceBoxSpace,choiceBoxBuilding.getValue());
+        choiceBoxSpace.setValue(itemToModify.getLocation().getSpaceId());
+
+        addListeners();
+    }
+
+    public void addListeners(){
+
+        txtFieldBarcode.textProperty().addListener(((observable, oldValue, newValue) -> {
+            itemToModify.setBarcode(txtFieldBarcode.getText());
+        }));
+
+        txtFieldKeyNum.textProperty().addListener(((observable, oldValue, newValue) -> {
+            itemToModify.setKeyNumber(txtFieldKeyNum.getText());
+        }));
+
+        choiceBoxStatus.valueProperty().addListener(((observable, oldValue, newValue)-> {
+            itemToModify.setStatus(choiceBoxStatus.getValue());
+        }));
+
+        choiceBoxBuilding.valueProperty().addListener(((observable, oldValue, newValue) -> {
+            FormBindings.bindSpaces(choiceBoxSpace,choiceBoxBuilding.getValue());
+        }));
+
+        choiceBoxSpace.valueProperty().addListener(((observable, oldValue, newValue) -> {
+            itemToModify.getLocation().setSpaceId(choiceBoxSpace.getValue());
+        }));
+
     }
 
     @FXML
     void submitForm(ActionEvent event) {
-
+        itemToModify.updateInDatabase();
     }
 
 }
