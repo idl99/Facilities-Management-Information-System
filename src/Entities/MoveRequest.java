@@ -31,12 +31,16 @@ public class MoveRequest{
     }
 
     public MoveRequest(Employee requestedBy, Space moveTo, ZonedDateTime relocationDate, String comments){
-        this.requestId = new ObjectId().toString();
+        this.requestId = generateRequestId();
         this.requestedBy = requestedBy;
         this.moveTo = moveTo;
         this.relocationDate = relocationDate;
         this.comments = comments;
         this.status = RequestStatus.Pending;
+    }
+
+    public String generateRequestId(){
+        return String.valueOf(morphia.getDatastore().createQuery(MoveRequest.class).count()+1);
     }
 
     public String getRequestId() {
@@ -85,6 +89,12 @@ public class MoveRequest{
 
     public void setStatus(RequestStatus status) {
         this.status = status;
+    }
+
+    public static MoveRequest getRequestById(String id){
+        return morphia.getDatastore().createQuery(MoveRequest.class)
+                .field("requestId").equal(id)
+                .iterator().next();
     }
 
     public void writeToDatabase(){
