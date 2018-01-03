@@ -93,7 +93,7 @@ public class MoveRequest{
 
     public static MoveRequest getRequestById(String id){
         return morphia.getDatastore().createQuery(MoveRequest.class)
-                .field("requestId").equal(id)
+                .field("_id").equal(id)
                 .iterator().next();
     }
 
