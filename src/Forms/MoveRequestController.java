@@ -52,12 +52,12 @@ public class MoveRequestController implements Initializable {
     @FXML
     void submitForm(ActionEvent event) {
         ZonedDateTime date = getDate();
-        new MoveRequest(
+        new MoveRequest.MoveRequestBuilder(
                 SessionController.sessionUser,
                 new Space(choiceBoxBuilding.getValue(),choiceBoxSpace.getValue()),
                 date,
                 txtFieldComments.getText()
-        ).writeToDatabase();
+        ).build().writeToDatabase();
 
         Stage stage = (Stage)((Node)(event.getSource())).getScene().getWindow();
         stage.close();

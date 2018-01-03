@@ -29,7 +29,7 @@ public class ModifyMoveRequestController implements Initializable{
         MoveRequest request = MoveRequest.getRequestById(txtFieldRequestNumber.getText());
 
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        txtFieldDate.setText(MoveRequest.dateToZonedDateTime(request.getRelocationDate()).format(dateFormatter));
+        txtFieldDate.setText(MoveRequest.dateToZonedDateTime(request.getRequestedDateTime()).format(dateFormatter));
 
         txtFieldStatus.setText(request.getStatus().toString());
 
