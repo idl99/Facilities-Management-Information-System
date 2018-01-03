@@ -11,7 +11,10 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.PostPersist;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Date;
 
 import static Application.Main.morphia;
 
@@ -20,7 +23,7 @@ public class MaintenanceRequest {
 
     @Id private String requestId;
     private Space space;
-    private ZonedDateTime dateTime;
+    private Date dateTime;
     private String description;
     private RequestStatus status;
 
@@ -29,11 +32,23 @@ public class MaintenanceRequest {
     }
 
     public MaintenanceRequest(Space space, ZonedDateTime dateTime, String description){
-        this.requestId = ObjectId.get().toString();
+        this.requestId = generateRequestId();
         this.space = space;
-        this.dateTime= dateTime;
+        this.dateTime= zonedDateTimeToDate(dateTime);
         this.description = description;
         this.status = RequestStatus.Pending;
+    }
+
+    public String generateRequestId(){
+        return String.valueOf(morphia.getDatastore().createQuery(MaintenanceRequest.class).count()+1);
+    }
+
+    public static Date zonedDateTimeToDate(ZonedDateTime zonedDateTime){
+        return Date.from(zonedDateTime.toInstant());
+    }
+
+    public static ZonedDateTime dateToZonedDateTime(Date date){
+        return ZonedDateTime.ofInstant(date.toInstant(), ZoneId.of("Asia/Colombo"));
     }
 
     public String getRequestId() {
@@ -52,11 +67,11 @@ public class MaintenanceRequest {
         this.space = space;
     }
 
-    public ZonedDateTime getDateTime() {
+    public Date getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(ZonedDateTime dateTime) {
+    public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
     }
 
