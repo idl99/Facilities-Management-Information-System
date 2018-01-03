@@ -14,6 +14,6 @@
     </font>
   </Button>
   <Button font="$x1" layoutX="75.0" layoutY="40.0" mnemonicParsing="false" onAction="#makeMaintenanceRequest" prefHeight="40.0" prefWidth="300.0" style="" text="MAKE MAINTENANCE REQUEST" />
-  <Button font="$x1" layoutX="75.0" layoutY="200.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="300.0" style="" text="MODIFY/CANCEL RELOCATION REQUEST" />
+  <Button font="$x1" layoutX="75.0" layoutY="200.0" mnemonicParsing="false" onAction="#modifyMoveRequest" prefHeight="40.0" prefWidth="300.0" style="" text="MODIFY/CANCEL RELOCATION REQUEST" />
   <Button font="$x1" layoutX="75.0" layoutY="280.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="300.0" style="" text="VIEW RELOCATION REQUEST STATUS" />
 </AnchorPane>
