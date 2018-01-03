@@ -12,7 +12,9 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.PostPersist;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Date;
 
 import static Application.Main.morphia;
 
@@ -22,7 +24,7 @@ public class MoveRequest{
     private @Id String requestId;
     private Employee requestedBy;
     private Space moveTo;
-    private ZonedDateTime relocationDate;
+    private Date relocationDate;
     private String comments;
     private RequestStatus status;
 
@@ -34,13 +36,21 @@ public class MoveRequest{
         this.requestId = generateRequestId();
         this.requestedBy = requestedBy;
         this.moveTo = moveTo;
-        this.relocationDate = relocationDate;
+        this.relocationDate = zonedDateTimeToDate(relocationDate);
         this.comments = comments;
         this.status = RequestStatus.Pending;
     }
 
     public String generateRequestId(){
         return String.valueOf(morphia.getDatastore().createQuery(MoveRequest.class).count()+1);
+    }
+
+    public static Date zonedDateTimeToDate(ZonedDateTime zonedDateTime){
+        return Date.from(zonedDateTime.toInstant());
+    }
+
+    public static ZonedDateTime dateToZonedDateTime(Date date){
+        return ZonedDateTime.ofInstant(date.toInstant(), ZoneId.of("Asia/Colombo"));
     }
 
     public String getRequestId() {
@@ -67,11 +77,11 @@ public class MoveRequest{
         this.moveTo = moveTo;
     }
 
-    public ZonedDateTime getRelocationDate() {
+    public Date getRelocationDate() {
         return relocationDate;
     }
 
-    public void setRelocationDate(ZonedDateTime relocationDate) {
+    public void setRelocationDate(Date relocationDate) {
         this.relocationDate = relocationDate;
     }
 
