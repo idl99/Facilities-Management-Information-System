@@ -14,7 +14,7 @@
     <Button font="$x1" layoutX="75.0" layoutY="200.0" mnemonicParsing="false" onAction="#recordFurnitureItem" prefHeight="30.0" prefWidth="300.0" style="" text="RECORD FURNITURE ITEMS" />
     <Button font="$x1" layoutX="75.0" layoutY="250.0" mnemonicParsing="false" onAction="#modifyFurnitureItem" prefHeight="30.0" prefWidth="300.0" style="" text="MODIFY EXISTING FURNITURE" />
     <Button font="$x1" layoutX="75.0" layoutY="330.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="300.0" style="" text="VIEW/ACTION MAINTENANCE CALLS" />
-    <Button font="$x1" layoutX="75.0" layoutY="380.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="300.0" style="" text="SCHEDULE/MODIFY OFFICE RELOCATION" />
+    <Button font="$x1" layoutX="75.0" layoutY="380.0" mnemonicParsing="false" onAction="#scheduleMoveRequest" prefHeight="30.0" prefWidth="300.0" style="" text="SCHEDULE/MODIFY OFFICE RELOCATION" />
       <Button layoutX="75.0" layoutY="120.0" mnemonicParsing="false" onAction="#recordRoomSpace" prefHeight="30.0" prefWidth="300.0" style="" text="RECORD ROOM SPACE">
          <font>
             <Font name="System Bold" size="14.0" fx:id="x11" />

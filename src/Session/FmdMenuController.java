@@ -30,6 +30,11 @@ public class FmdMenuController {
     }
 
     @FXML
+    void scheduleMoveRequest(ActionEvent event){
+        newFormWindow("/Forms/ScheduleMoveForm.fxml");
+    }
+
+    @FXML
     void initialize() {
 
     }
