@@ -24,6 +24,7 @@ public class MoveRequest{
     private Space moveTo;
     private ZonedDateTime relocationDate;
     private String comments;
+    private RequestStatus status;
 
     public MoveRequest(){
 
@@ -35,6 +36,7 @@ public class MoveRequest{
         this.moveTo = moveTo;
         this.relocationDate = relocationDate;
         this.comments = comments;
+        this.status = RequestStatus.Pending;
     }
 
     public String getRequestId() {
@@ -75,6 +77,14 @@ public class MoveRequest{
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    public RequestStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(RequestStatus status) {
+        this.status = status;
     }
 
     public void writeToDatabase(){

@@ -22,6 +22,7 @@ public class MaintenanceRequest {
     private Space space;
     private ZonedDateTime dateTime;
     private String description;
+    private RequestStatus status;
 
     public MaintenanceRequest(){
 
@@ -32,6 +33,7 @@ public class MaintenanceRequest {
         this.space = space;
         this.dateTime= dateTime;
         this.description = description;
+        this.status = RequestStatus.Pending;
     }
 
     public String getRequestId() {
@@ -64,6 +66,14 @@ public class MaintenanceRequest {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public RequestStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(RequestStatus status) {
+        this.status = status;
     }
 
     public void writeToDatabase(){
