@@ -12,7 +12,7 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.PostPersist;
 
-import java.util.Date;
+import java.time.ZonedDateTime;
 
 import static Application.Main.morphia;
 
@@ -22,14 +22,14 @@ public class MoveRequest{
     private @Id String requestId;
     private Employee requestedBy;
     private Space moveTo;
-    private Date relocationDate;
+    private ZonedDateTime relocationDate;
     private String comments;
 
     public MoveRequest(){
 
     }
 
-    public MoveRequest(Employee requestedBy, Space moveTo, Date relocationDate, String comments){
+    public MoveRequest(Employee requestedBy, Space moveTo, ZonedDateTime relocationDate, String comments){
         this.requestId = new ObjectId().toString();
         this.requestedBy = requestedBy;
         this.moveTo = moveTo;
@@ -61,11 +61,11 @@ public class MoveRequest{
         this.moveTo = moveTo;
     }
 
-    public Date getRelocationDate() {
+    public ZonedDateTime getRelocationDate() {
         return relocationDate;
     }
 
-    public void setRelocationDate(Date relocationDate) {
+    public void setRelocationDate(ZonedDateTime relocationDate) {
         this.relocationDate = relocationDate;
     }
 

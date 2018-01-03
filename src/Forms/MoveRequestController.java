@@ -16,9 +16,11 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class MoveRequestController implements Initializable {
@@ -37,32 +39,41 @@ public class MoveRequestController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        FormBindings.bindBuildingNumbers(choiceBoxBuilding);
 
         choiceBoxBuilding.valueProperty().addListener(((observable, oldValue, newValue) -> {
             FormBindings.bindSpacesBySpaceType(choiceBoxSpace, choiceBoxBuilding.getValue(),
                     SpaceType.OfficeSpace);
         }));
 
+        FormBindings.bindBuildingNumbers(choiceBoxBuilding);
+
     }
 
     @FXML
     void submitForm(ActionEvent event) {
-        try {
-            MoveRequest request = new MoveRequest(
-                    SessionController.sessionUser,
-                    new Space(choiceBoxBuilding.getValue(),choiceBoxSpace.getValue()),
-                    new SimpleDateFormat("dd/MM/yyyy").parse(txtFieldDate.getText()),
-                    txtFieldComments.getText()
-            );
-            request.writeToDatabase();
+        ZonedDateTime date = getDate();
+        new MoveRequest(
+                SessionController.sessionUser,
+                new Space(choiceBoxBuilding.getValue(),choiceBoxSpace.getValue()),
+                date,
+                txtFieldComments.getText()
+        ).writeToDatabase();
 
-            Stage stage = (Stage)((Node)(event.getSource())).getScene().getWindow();
-            stage.close();
+        Stage stage = (Stage)((Node)(event.getSource())).getScene().getWindow();
+        stage.close();
 
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+    }
+
+    @FXML
+    ZonedDateTime getDate(){
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        return ZonedDateTime.of(
+                LocalDate.parse(txtFieldDate.getText(),formatter),
+                LocalTime.of(0,0),
+                ZoneId.systemDefault()
+        );
     }
 
 }
