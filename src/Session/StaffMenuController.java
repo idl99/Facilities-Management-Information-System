@@ -22,6 +22,11 @@ public class StaffMenuController implements Initializable{
         newFormWindow("/Forms/MoveRequestForm.fxml");
     }
 
+    @FXML
+    void makeMaintenanceRequest(){
+        newFormWindow("/Forms/MaintenanceRequestForm.fxml");
+    }
+
     void newFormWindow(String fxmlResource){
         try {
             Stage stage = new Stage();
