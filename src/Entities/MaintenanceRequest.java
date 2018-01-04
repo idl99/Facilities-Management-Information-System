@@ -14,6 +14,7 @@ import java.lang.reflect.Field;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.List;
 
 import static Application.Main.morphia;
 
@@ -88,6 +89,12 @@ public class MaintenanceRequest {
 
     public void setStatus(RequestStatus status) {
         this.status = status;
+    }
+
+    public static List<MaintenanceRequest> getAll(){
+        return morphia.getDatastore().createQuery(MaintenanceRequest.class)
+                .field("status").notEqual(RequestStatus.Cancelled)
+                .asList();
     }
 
     public static MaintenanceRequest getById(String requestId){

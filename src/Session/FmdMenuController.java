@@ -35,6 +35,11 @@ public class FmdMenuController {
     }
 
     @FXML
+    void actionMaintenanceCalls(ActionEvent event){
+        newFormWindow("/Forms/ActionMaintenanceForm.fxml");
+    }
+
+    @FXML
     void initialize() {
 
     }
