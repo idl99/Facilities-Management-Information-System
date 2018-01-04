@@ -11,6 +11,8 @@ import java.util.ResourceBundle;
 
 public class ModifyMoveController implements Initializable{
 
+    private static MoveRequest requestToModify;
+
     @FXML
     private TextField txtFieldRequestNumber;
 
@@ -26,12 +28,12 @@ public class ModifyMoveController implements Initializable{
     }
 
     @FXML void searchMoveRequest(){
-        MoveRequest request = MoveRequest.getRequestById(txtFieldRequestNumber.getText());
+        requestToModify = MoveRequest.getRequestById(txtFieldRequestNumber.getText());
 
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        txtFieldDate.setText(MoveRequest.dateToZonedDateTime(request.getRequestedDateTime()).format(dateFormatter));
+        txtFieldDate.setText(MoveRequest.dateToZonedDateTime(requestToModify.getRequestedDateTime()).format(dateFormatter));
 
-        txtFieldStatus.setText(request.getStatus().toString());
+        txtFieldStatus.setText(requestToModify.getStatus().toString());
 
     }
 
