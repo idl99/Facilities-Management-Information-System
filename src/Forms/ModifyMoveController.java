@@ -9,7 +9,7 @@ import java.net.URL;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
-public class ModifyMoveRequestController implements Initializable{
+public class ModifyMoveController implements Initializable{
 
     @FXML
     private TextField txtFieldRequestNumber;
