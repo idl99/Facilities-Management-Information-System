@@ -8,7 +8,9 @@ import javafx.scene.image.Image;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.PostPersist;
+import org.mongodb.morphia.query.Query;
 
+import java.lang.reflect.Field;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
@@ -88,8 +90,29 @@ public class MaintenanceRequest {
         this.status = status;
     }
 
+    public static MaintenanceRequest getById(String requestId){
+        return morphia.getDatastore().createQuery(MaintenanceRequest.class)
+                .field("_id").equal(requestId)
+                .iterator().next();
+    }
+
     public void writeToDatabase(){
         morphia.getDatastore().save(this);
+    }
+
+    public void updateInDatabase(){
+        Query<MaintenanceRequest> query = morphia.getDatastore().createQuery(MaintenanceRequest.class).
+                field("_id").equal(this.requestId);
+        for(Field field: this.getClass().getDeclaredFields()){
+            try {
+                morphia.getDatastore().update(query,
+                        morphia.getDatastore().createUpdateOperations(MaintenanceRequest.class)
+                                .set(field.getName(),field.get(this))
+                );
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @PostPersist

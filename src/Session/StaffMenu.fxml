@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:controller="Session.StaffMenuController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="450.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Session.StaffMenuController">
   <Button layoutX="75.0" layoutY="120.0" mnemonicParsing="false" onAction="#makeRelocationRequest" prefHeight="40.0" prefWidth="300.0" style="" text="MAKE RELOCATION REQUEST">
     <font>
       <Font name="System Bold" size="14.0" fx:id="x1" />
@@ -15,5 +12,8 @@
   </Button>
   <Button font="$x1" layoutX="75.0" layoutY="40.0" mnemonicParsing="false" onAction="#makeMaintenanceRequest" prefHeight="40.0" prefWidth="300.0" style="" text="MAKE MAINTENANCE REQUEST" />
   <Button font="$x1" layoutX="75.0" layoutY="200.0" mnemonicParsing="false" onAction="#modifyMoveRequest" prefHeight="40.0" prefWidth="300.0" style="" text="MODIFY/CANCEL RELOCATION REQUEST" />
-  <Button font="$x1" layoutX="75.0" layoutY="280.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="300.0" style="" text="VIEW RELOCATION REQUEST STATUS" />
+  <Button layoutX="75.0" layoutY="280.0" mnemonicParsing="false" onAction="#modifyMaintenanceRequest" prefHeight="40.0" prefWidth="300.0" style="" text="MODIFY/CANCEL MAINTENANCE REQUEST">
+      <font>
+         <Font name="System Bold" size="13.0" />
+      </font></Button>
 </AnchorPane>
