@@ -26,6 +26,9 @@ public class ScheduleMoveController implements Initializable{
     private Accordion accordionMoveDetails;
 
     @FXML
+    private TitledPane titledPaneRequestDetails;
+
+    @FXML
     private TextField txtFieldEmployee;
 
     @FXML
@@ -116,6 +119,8 @@ public class ScheduleMoveController implements Initializable{
         if(selectedRequest.getStatus()==RequestStatus.Accepted){
             btnReject.setDisable(true);
         }
+
+        accordionMoveDetails.setExpandedPane(titledPaneRequestDetails);
 
     }
 
