@@ -20,7 +20,7 @@
       </Label>
       <Accordion fx:id="accordionMoveDetails" layoutX="268.0" layoutY="89.0">
         <panes>
-          <TitledPane animated="false" prefWidth="500.0" text="View Request Details">
+          <TitledPane fx:id="titledPaneRequestDetails" animated="false" prefWidth="500.0" text="View Request Details">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="250.0" prefWidth="498.0">
                      <children>
@@ -41,11 +41,7 @@
                         <TextField fx:id="txtFieldDate" editable="false" layoutX="151.0" layoutY="124.0" prefHeight="26.0" prefWidth="125.0" promptText="DD/MM/YYYY" />
                         <Label alignment="CENTER_RIGHT" layoutX="16.0" layoutY="128.0" prefHeight="20.0" prefWidth="110.0" text="Requested Date:" />
                         <Label alignment="CENTER_RIGHT" layoutX="16.0" layoutY="159.0" prefHeight="20.0" prefWidth="110.0" text="Comments:" />
-                        <TextArea fx:id="txtFieldComments" editable="false" layoutX="151.0" layoutY="159.0" prefHeight="80.0" prefWidth="270.0">
-                           <font>
-                              <Font size="10.0" />
-                           </font>
-                        </TextArea>
+                        <TextArea fx:id="txtFieldComments" editable="false" layoutX="151.0" layoutY="159.0" prefHeight="80.0" prefWidth="270.0" />
                      </children>
                   </AnchorPane>
             </content>
