@@ -62,7 +62,7 @@ public class ScheduleMoveController implements Initializable{
         listViewMaintenanceRequests.getSelectionModel().selectedItemProperty().
                 addListener(((observable, oldValue, newValue) -> {
             accordionMoveDetails.setVisible(true);
-            bindMoveDetailsToForm(listViewMaintenanceRequests.getSelectionModel().getSelectedItem());
+            bindMoveDetailsToForm(listViewMaintenanceRequests.getSelectionModel().getSelectedItem().split("-")[0]);
         }));
     }
 
@@ -82,8 +82,9 @@ public class ScheduleMoveController implements Initializable{
     }
 
     void bindMoveRequests(ListView view){
-        for(MoveRequest request : MoveRequest.getAll()){
-            listViewMaintenanceRequests.getItems().add(request.getRequestId());
+    for(MoveRequest request : MoveRequest.getAll()){
+            listViewMaintenanceRequests.getItems().add(request.getRequestId()+"-"+
+                    request.getRequestedBy().getName()+"-"+request.getStatus());
         }
     }
 
