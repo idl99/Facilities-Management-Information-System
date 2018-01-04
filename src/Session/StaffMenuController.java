@@ -29,7 +29,7 @@ public class StaffMenuController implements Initializable{
 
     @FXML
     void modifyMoveRequest(){
-        newFormWindow("/Forms/ModifyMoveRequest.fxml");
+        newFormWindow("/Forms/ModifyMoveForm.fxml");
     }
 
     void newFormWindow(String fxmlResource){
