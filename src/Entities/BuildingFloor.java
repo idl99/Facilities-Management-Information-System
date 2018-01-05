@@ -2,9 +2,9 @@ package Entities;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
-import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.*;
 import org.mongodb.morphia.query.Sort;
+import org.mongodb.morphia.utils.IndexDirection;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -17,6 +17,7 @@ public class BuildingFloor{
 
     @Id
     private ObjectId id;
+    @Indexed(value = IndexDirection.DESC)
     private String buildingNumber;
     private String buildingName;
     private String floorNumber;
@@ -88,6 +89,16 @@ public class BuildingFloor{
     public String writeToDatabase() {
         morphia.getDatastore().save(this);
         return "Successfully added details of Building number- "+getBuildingNumber()+" Floor number- "+getFloorNumber();
+    }
+
+    public static List<BuildingFloor> getAll(){
+        return morphia.getDatastore().createQuery(BuildingFloor.class).asList();
+    }
+
+    public static BuildingFloor getById(String buildingFloor){
+        return  morphia.getDatastore().createQuery(BuildingFloor.class)
+                .field("buildingNumber").equal(buildingFloor.split("-")[0])
+                .field("floorNumber").equal(buildingFloor.split("-")[1]).iterator().next();
     }
 
     public static List<String> distinctBuildingNumber(){

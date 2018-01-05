@@ -47,7 +47,8 @@ public class SessionController implements Initializable{
             if (sessionUser.getRole().equals("FMD")){
                 options = FXMLLoader.load(getClass().getResource("/Session/FmdMenu.fxml"));
             }
-            else if(sessionUser.getRole().equals("Normal")){
+            else if(sessionUser.getRole().equals("Normal")||
+                    sessionUser.getRole().equals("Superior")){
                 options = FXMLLoader.load(getClass().getResource("/Session/StaffMenu.fxml"));
             }
             content.getChildren().add(options);

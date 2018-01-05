@@ -1,54 +1,65 @@
 package Forms;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.Dialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.util.List;
+import java.util.Optional;
+
 public class MessageDialog {
     
-    private Alert alert;
+    private Dialog dialog;
 
     private MessageDialog(MessageDialogBuilder builder){
-        this.alert = builder.alert;
+        this.dialog = builder.dialog;
     }
 
-    public Alert getAlert() {
-        return alert;
+    public Dialog getDialog() {
+        return dialog;
     }
 
-    public void setAlert(Alert alert) {
-        this.alert = alert;
+    public void setDialog(Alert dialog) {
+        this.dialog = dialog;
     }
 
-    public void show(){
-        alert.showAndWait();
+    public String show(){
+        Optional<String> result =  dialog.showAndWait();
+        return result.get();
     }
 
     public static class MessageDialogBuilder{
     
-        private Alert alert;
+        private Dialog dialog;
         
         public MessageDialogBuilder(){
-            alert = new Alert(Alert.AlertType.CONFIRMATION);
+            dialog = new Alert(Alert.AlertType.CONFIRMATION);
+        }
+
+        public MessageDialogBuilder choiceDialogType(List<String> choices){
+            dialog = new ChoiceDialog<>("",choices);
+            return this;
         }
         
         public MessageDialogBuilder withTitle(String text){
-            alert.setTitle(text);
+            dialog.setTitle(text);
             return this;
         }
         
         public MessageDialogBuilder withHeader(String text){
-            alert.setHeaderText(text);
+            dialog.setHeaderText(text);
             return this;
         }
         
         public MessageDialogBuilder withContentText(String text){
-            alert.setContentText(text);
+            dialog.setContentText(text);
             return this;
         }
         
         public MessageDialogBuilder withGraphic(Image graphic){
-            alert.setGraphic(new ImageView(graphic));
+            dialog.setGraphic(new ImageView(graphic));
             return this;
         }
 
