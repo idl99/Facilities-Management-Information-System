@@ -80,6 +80,7 @@ public class ModifyFurnitureController implements Initializable {
         }));
 
         choiceBoxBuilding.valueProperty().addListener(((observable, oldValue, newValue) -> {
+            itemToModify.getLocation().setBuildingNumber(choiceBoxBuilding.getValue());
             FormBindings.bindSpaces(choiceBoxSpace,choiceBoxBuilding.getValue());
         }));
 
