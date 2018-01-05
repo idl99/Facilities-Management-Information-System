@@ -6,18 +6,23 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Session.FmdMenuController">
   <children>
-    <Button layoutX="75.0" layoutY="70.0" mnemonicParsing="false" onAction="#recordFloorDetails" prefHeight="30.0" prefWidth="300.0" style="" text="RECORD FLOOR DETAILS">
+    <Button layoutX="75.0" layoutY="38.0" mnemonicParsing="false" onAction="#recordFloorDetails" prefHeight="30.0" prefWidth="300.0" style="" text="RECORD FLOOR DETAILS">
       <font>
         <Font name="System Bold" size="14.0" fx:id="x1" />
       </font>
     </Button>
-    <Button font="$x1" layoutX="75.0" layoutY="200.0" mnemonicParsing="false" onAction="#recordFurnitureItem" prefHeight="30.0" prefWidth="300.0" style="" text="RECORD FURNITURE ITEMS" />
-    <Button font="$x1" layoutX="75.0" layoutY="250.0" mnemonicParsing="false" onAction="#modifyFurnitureItem" prefHeight="30.0" prefWidth="300.0" style="" text="MODIFY EXISTING FURNITURE" />
-    <Button font="$x1" layoutX="75.0" layoutY="330.0" mnemonicParsing="false" onAction="#actionMaintenanceCalls" prefHeight="30.0" prefWidth="300.0" style="" text="VIEW/ACTION MAINTENANCE CALLS" />
-    <Button font="$x1" layoutX="75.0" layoutY="380.0" mnemonicParsing="false" onAction="#scheduleMoveRequest" prefHeight="30.0" prefWidth="300.0" style="" text="SCHEDULE/MODIFY OFFICE RELOCATION" />
-      <Button layoutX="75.0" layoutY="120.0" mnemonicParsing="false" onAction="#recordRoomSpace" prefHeight="30.0" prefWidth="300.0" style="" text="RECORD ROOM SPACE">
+    <Button font="$x1" layoutX="75.0" layoutY="148.0" mnemonicParsing="false" onAction="#recordFurnitureItem" prefHeight="30.0" prefWidth="300.0" style="" text="RECORD FURNITURE ITEMS" />
+    <Button font="$x1" layoutX="75.0" layoutY="188.0" mnemonicParsing="false" onAction="#modifyFurnitureItem" prefHeight="30.0" prefWidth="300.0" style="" text="MODIFY EXISTING FURNITURE" />
+    <Button font="$x1" layoutX="75.0" layoutY="258.0" mnemonicParsing="false" onAction="#actionMaintenanceCalls" prefHeight="30.0" prefWidth="300.0" style="" text="VIEW/ACTION MAINTENANCE CALLS" />
+    <Button font="$x1" layoutX="75.0" layoutY="298.0" mnemonicParsing="false" onAction="#scheduleMoveRequest" prefHeight="30.0" prefWidth="300.0" style="" text="SCHEDULE/MODIFY OFFICE RELOCATION" />
+      <Button layoutX="75.0" layoutY="78.0" mnemonicParsing="false" onAction="#recordRoomSpace" prefHeight="30.0" prefWidth="300.0" style="" text="RECORD ROOM SPACE">
          <font>
             <Font name="System Bold" size="14.0" fx:id="x11" />
+         </font>
+      </Button>
+      <Button layoutX="75.0" layoutY="368.0" mnemonicParsing="false" onAction="#viewFloorPlans" prefHeight="30.0" prefWidth="300.0" style="" text="VIEW BUILDING FLOOR PLANS">
+         <font>
+            <Font name="System Bold" size="14.0" fx:id="x12" />
          </font>
       </Button>
   </children>
