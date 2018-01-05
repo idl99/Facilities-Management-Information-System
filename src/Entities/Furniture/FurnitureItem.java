@@ -24,8 +24,6 @@ public class FurnitureItem{
     private FurnitureItemType itemType;
     private FurnitureItemMaterial material;
     private FurnitureItemStatus status;
-
-    @Reference("spaces")
     private Space location;
     private FurnitureItemPurchase purchase;
 

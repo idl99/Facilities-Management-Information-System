@@ -8,7 +8,6 @@ import java.util.List;
 
 import static Application.Main.morphia;
 
-@Embedded
 @Entity("spaces")
 public class Space{
 
