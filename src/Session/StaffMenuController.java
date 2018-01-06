@@ -50,7 +50,7 @@ public class StaffMenuController implements Initializable{
 
     @FXML
     void viewFloorPlans(ActionEvent event){
-
+        newFormWindow("/Forms/ViewFloorPlan.fxml");
     }
 
     @FXML

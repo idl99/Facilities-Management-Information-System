@@ -51,7 +51,7 @@ public class FmdMenuController implements Initializable {
 
     @FXML
     void viewFloorPlans(ActionEvent event){
-        newFormWindow("");
+        newFormWindow("/Forms/ViewFloorPlan.fxml");
     }
 
     void newFormWindow(String fxmlResource){
