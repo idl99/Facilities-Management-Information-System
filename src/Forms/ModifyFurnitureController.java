@@ -2,6 +2,7 @@ package Forms;
 
 import Entities.Furniture.FurnitureItem;
 import Entities.Furniture.FurnitureItemStatus;
+import Entities.Space.Space;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -47,7 +48,8 @@ public class ModifyFurnitureController implements Initializable {
 
     @FXML
     void searchFurnitureItem(ActionEvent event) {
-        itemToModify = FurnitureItem.getFurnitureByBarcode(txtFieldBarcode.getText());
+
+        itemToModify = FurnitureItem.getFurnitureByBarcode(txtFieldSearchBarcode.getText());
 
         txtFieldBarcode.setText(itemToModify.getBarcode());
 
@@ -61,37 +63,13 @@ public class ModifyFurnitureController implements Initializable {
 
         FormBindings.bindSpaces(choiceBoxSpace,choiceBoxBuilding.getValue());
         choiceBoxSpace.setValue(itemToModify.getLocation().getSpaceId());
-
-        addListeners();
-    }
-
-    public void addListeners(){
-
-        txtFieldBarcode.textProperty().addListener(((observable, oldValue, newValue) -> {
-            itemToModify.setBarcode(txtFieldBarcode.getText());
-        }));
-
-        txtFieldKeyNum.textProperty().addListener(((observable, oldValue, newValue) -> {
-            itemToModify.setKeyNumber(txtFieldKeyNum.getText());
-        }));
-
-        choiceBoxStatus.valueProperty().addListener(((observable, oldValue, newValue)-> {
-            itemToModify.setStatus(choiceBoxStatus.getValue());
-        }));
-
-        choiceBoxBuilding.valueProperty().addListener(((observable, oldValue, newValue) -> {
-            itemToModify.getLocation().setBuildingNumber(choiceBoxBuilding.getValue());
-            FormBindings.bindSpaces(choiceBoxSpace,choiceBoxBuilding.getValue());
-        }));
-
-        choiceBoxSpace.valueProperty().addListener(((observable, oldValue, newValue) -> {
-            itemToModify.getLocation().setSpaceId(choiceBoxSpace.getValue());
-        }));
-
     }
 
     @FXML
     void submitForm(ActionEvent event) {
+        itemToModify.setKeyNumber(txtFieldKeyNum.getText());
+        itemToModify.setStatus(choiceBoxStatus.getValue());
+        itemToModify.setLocation(new Space(choiceBoxBuilding.getValue(),choiceBoxSpace.getValue()));
         itemToModify.updateInDatabase();
     }
 
