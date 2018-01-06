@@ -1,5 +1,5 @@
 package Entities.Furniture;
 
 public enum FurnitureItemStatus {
-    InUse, BeyondRepair, Sold
+    IN_USE, BEYOND_REPAIR, SOLD
 }

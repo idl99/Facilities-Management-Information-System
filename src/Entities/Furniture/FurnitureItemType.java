@@ -1,5 +1,5 @@
 package Entities.Furniture;
 
 public enum FurnitureItemType {
-    Desk, FilingCabinet, BookCase, VizChair, GasLiftChair, FixedFrameChair
+    DESK, FILING_CABINET, BOOKCASE, VIZ_CHAIR, GAS_LIFT_CHAIR, FIXED_FRAME_CHAIR
 }

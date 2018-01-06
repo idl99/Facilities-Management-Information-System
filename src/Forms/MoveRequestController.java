@@ -42,7 +42,7 @@ public class MoveRequestController implements Initializable {
 
         choiceBoxBuilding.valueProperty().addListener(((observable, oldValue, newValue) -> {
             FormBindings.bindSpacesBySpaceType(choiceBoxSpace, choiceBoxBuilding.getValue(),
-                    SpaceType.OfficeSpace);
+                    SpaceType.OFFICE_SPACE);
         }));
 
         FormBindings.bindBuildingNumbers(choiceBoxBuilding);

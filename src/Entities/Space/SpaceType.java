@@ -2,6 +2,6 @@ package Entities.Space;
 
 public enum SpaceType {
 
-    OfficeSpace, TeachingSpace, LabarotarySpace, AncillarySpace, GeneralSpace, InformationService_Library, StudentAccomodation, NonUsable;
+    OFFICE_SPACE, TEACHING_SPACE, LABORATORY_SPACE, ANCILLARY_SPACE, GENERAL_SPACE, INFORMATION_SERVICE_LIBRARY, STUDENT_ACCOMODATION, NON_USABLE;
 
 }

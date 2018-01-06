@@ -1,5 +1,5 @@
 package Entities.Furniture;
 
 public enum FurnitureItemMaterial {
-    Chipboard, Melamine, StainedPine, Metal, Unspecified
+    CHIPBOARD, MELAMINE, STAINED_PINE, METAL, UNSPECIFIED
 }

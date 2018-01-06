@@ -106,12 +106,13 @@ public class FmoReport {
     public void addSpaceDetails(Space space) throws DocumentException{
 
         Chunk spaceChunk = new Chunk("Space Id: "+space.getSpaceId());
-        Chunk spaceTypeChunk = new Chunk("Space Type: "+space.getType().toString().replace('_','\u0000'));
+        Chunk spaceTypeChunk = new Chunk("Space Type: "+space.getType()
+                .toString().replaceAll("_"," "));
         Chunk occupyingDeptChunk = new Chunk("Occupying Dept: "+space.getOccupyingDepartment());
 
         Chunk occupantChunk = new Chunk("Occupant: ");
         if(space.getOccupant_EmployeeId().equals("") &&
-                space.getType() == SpaceType.OfficeSpace)
+                space.getType() == SpaceType.OFFICE_SPACE)
             occupantChunk.append("Vacant");
         else  occupantChunk.append(space.getOccupant_EmployeeId());
 
@@ -149,7 +150,7 @@ public class FmoReport {
         table.addCell("#");
         table.addCell("Barcode");
         table.addCell("Description");
-        table.addCell("Acquistion Date");
+        table.addCell("Acquisition Date");
         table.addCell("Cost");
 
         int numOfItems = 0;
@@ -159,8 +160,10 @@ public class FmoReport {
             table.addCell(String.valueOf(++numOfItems));
             table.addCell(item.getBarcode());
             table.addCell(
-                    String.valueOf(item.getMaterial()).replace('_','\u0000')
-                            +String.valueOf(item.getItemType()).replace('_','\u0000'));
+                    String.valueOf(item.getMaterial()).replaceAll("_"," ")
+                            .replaceAll("null","") +
+                            " " +
+                            String.valueOf(item.getItemType()).replaceAll("_"," "));
             table.addCell(new SimpleDateFormat("dd/MM/yyyy").format(item.getPurchase().getDate()));
             table.addCell(String.valueOf(item.getPurchase().getCost()));
             totalRoomCost+=item.getPurchase().getCost();

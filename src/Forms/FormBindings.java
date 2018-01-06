@@ -67,20 +67,20 @@ public class FormBindings {
     @FXML static void bindFurnitureItemMaterial(ChoiceBox<FurnitureItemMaterial> choiceBox,
                                                 FurnitureItemType type){
         choiceBox.getItems().clear();
-        if(type == FurnitureItemType.Desk || type == FurnitureItemType.FilingCabinet){
+        if(type == FurnitureItemType.DESK || type == FurnitureItemType.FILING_CABINET){
             choiceBox.getItems().addAll(
-                    FurnitureItemMaterial.Chipboard,
-                    FurnitureItemMaterial.Melamine,
-                    FurnitureItemMaterial.StainedPine);
+                    FurnitureItemMaterial.CHIPBOARD,
+                    FurnitureItemMaterial.MELAMINE,
+                    FurnitureItemMaterial.STAINED_PINE);
         }
-        else if(type == FurnitureItemType.BookCase){
+        else if(type == FurnitureItemType.BOOKCASE){
             choiceBox.getItems().addAll(
-                    FurnitureItemMaterial.Metal,
-                    FurnitureItemMaterial.StainedPine
+                    FurnitureItemMaterial.METAL,
+                    FurnitureItemMaterial.STAINED_PINE
             );
         }
         else{
-            choiceBox.getItems().add(FurnitureItemMaterial.Unspecified);
+            choiceBox.getItems().add(FurnitureItemMaterial.UNSPECIFIED);
         }
     }
 
