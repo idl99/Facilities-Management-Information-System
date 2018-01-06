@@ -74,14 +74,17 @@ public class ScheduleMoveController implements Initializable{
     }
 
     @FXML
-    void updateMoveDetails(ActionEvent event) {
+    void updateMoveDetails(ActionEvent event) {/*
         new MoveRequest.MoveRequestBuilder(selectedRequest.getRequestedBy(),selectedRequest.getMoveTo(),
                 MoveRequest.dateToZonedDateTime(selectedRequest.getRequestedDateTime()),
                 selectedRequest.getComments())
                 .ofId(selectedRequest.getRequestId())
                 .scheduledFor(
                         getScheduledDateTime())
-                .build().updateInDatabase();
+                .build().setStatus(selectedRequest.getStatus()).updateInDatabase();*/
+        selectedRequest.setStatus(RequestStatus.Accepted);
+        selectedRequest.setScheduledDateTime(MoveRequest.zonedDateTimeToDate(getScheduledDateTime()));
+        selectedRequest.updateInDatabase();
     }
 
     void bindMoveRequests(ListView view){
