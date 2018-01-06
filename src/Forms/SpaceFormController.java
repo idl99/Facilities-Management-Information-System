@@ -16,8 +16,6 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-
-
 public class SpaceFormController implements Initializable {
 
     @FXML private ChoiceBox<String> choiceBoxBuildingNum;
@@ -99,7 +97,7 @@ public class SpaceFormController implements Initializable {
         alert.setHeaderText("Successfully recorded details");
         alert.setContentText(message+" Do you wish to add any more records? " +
                 "If YES, Click on OK, else Click on Cancel to Exit");
-        alert.setGraphic(new ImageView(new Image("/Graphics/Sucess_Icon.png")));
+        alert.setGraphic(new ImageView(new Image("/Graphics/Icons/Sucess_Icon.png")));
         Optional<ButtonType> result = alert.showAndWait();
 
         return result;

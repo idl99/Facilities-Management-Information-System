@@ -128,7 +128,7 @@ public class MaintenanceRequest {
                 withHeader("Successfully recorded Maintenance Request").
                 withContentText("Successfully made Maintenace Request (Request Id) "+
                         this.requestId+". Please check in back later for approval status").
-                withGraphic(new Image("/Graphics/Sucess_Icon.png")).
+                withGraphic(new Image("/Graphics/Icons/Sucess_Icon.png")).
                 build();
         dialog.show();
     }

@@ -7,7 +7,6 @@ import javafx.scene.image.Image;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.PostPersist;
-import org.mongodb.morphia.annotations.Reference;
 import org.mongodb.morphia.query.Query;
 
 import java.lang.reflect.Field;
@@ -136,7 +135,7 @@ public class FurnitureItem{
                 withHeader("Successfully inserted record into Furniture Items' Database").
                 withContentText("Successfully inserted Furniture Item (Barcode Id) "+
                         this.barcode+" into Furniture Items' Database").
-                withGraphic(new Image("/Graphics/Sucess_Icon.png")).
+                withGraphic(new Image("/Graphics/Icons/Sucess_Icon.png")).
                 build();
         dialog.show();
     }

@@ -1,6 +1,5 @@
 package Entities;
 
-import Entities.Furniture.FurnitureItem;
 import Entities.Space.Space;
 
 import Forms.MessageDialog;
@@ -149,7 +148,7 @@ public class MoveRequest{
                 withHeader("Successfully made Relocation Request  ").
                 withContentText("Successfully made Relocation Request (Request Id) "+
                         this.requestId+". Please check in back later for approval status").
-                withGraphic(new Image("/Graphics/Sucess_Icon.png")).
+                withGraphic(new Image("/Graphics/Icons/Sucess_Icon.png")).
                 build();
         dialog.show();
     }
