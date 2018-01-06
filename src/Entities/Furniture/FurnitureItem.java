@@ -99,14 +99,19 @@ public class FurnitureItem{
         this.purchase = purchase;
     }
 
-    public static FurnitureItem getFurnitureByBarcode(String barcode){
-        final Query<FurnitureItem> query = morphia.getDatastore().createQuery(FurnitureItem.class);
-        final List<FurnitureItem> items = query.asList();
-        return items.get(0);
-    }
-
     public void writeToDatabase(){
         morphia.getDatastore().save(this);
+    }
+
+    public static FurnitureItem getFurnitureByBarcode(String barcode){
+        return morphia.getDatastore().createQuery(FurnitureItem.class)
+                .field("_id").equal(barcode).iterator().next();
+    }
+
+    public static List<FurnitureItem> getFurnitureBySpace(String spaceId, String buildingNumber){
+        return morphia.getDatastore().createQuery(FurnitureItem.class)
+                .field("location._id").equal(spaceId)
+                .field("location.buildingNumber").equal(buildingNumber).asList();
     }
 
     public void updateInDatabase(){
