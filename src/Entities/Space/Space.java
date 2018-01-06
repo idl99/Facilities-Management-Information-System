@@ -1,6 +1,5 @@
 package Entities.Space;
 
-import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
@@ -12,7 +11,7 @@ import static Application.Main.morphia;
 public class Space{
 
     private String buildingNumber;
-    private String buildingFloorNumber;
+    private String floorNumber;
     @Id private String spaceId;
     private String name;
     private SpaceType type;
@@ -23,10 +22,10 @@ public class Space{
 
     }
 
-    public Space(String buildingNumber, String buildingFloorNumber, String spaceId, String name, SpaceType type,
+    public Space(String buildingNumber, String floorNumber, String spaceId, String name, SpaceType type,
                  String empId, String department){
         this.buildingNumber = buildingNumber;
-        this.buildingFloorNumber = buildingFloorNumber;
+        this.floorNumber = floorNumber;
         this.spaceId = spaceId;
         this.name = name;
         this.type = type;
@@ -47,12 +46,12 @@ public class Space{
         this.buildingNumber = buildingNumber;
     }
 
-    public String getBuildingFloorNumber() {
-        return buildingFloorNumber;
+    public String getFloorNumber() {
+        return floorNumber;
     }
 
-    public void setBuildingFloorNumber(String buildingFloorNumber) {
-        this.buildingFloorNumber = buildingFloorNumber;
+    public void setFloorNumber(String floorNumber) {
+        this.floorNumber = floorNumber;
     }
 
     public String getSpaceId() {
@@ -104,6 +103,12 @@ public class Space{
         return morphia.getDatastore().createQuery(Space.class).
                 field("buildingNumber").equal(buildingNumber).
                 asList();
+    }
+
+    public static List<Space> getSpaceByBuildingFloor(String buildingNumber, String floorNumber){
+        return morphia.getDatastore().createQuery(Space.class)
+                .field("buildingNumber").equal(buildingNumber)
+                .field("floorNumber").equal(floorNumber).asList();
     }
 
 }
