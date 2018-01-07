@@ -1,5 +1,6 @@
 package Forms;
 
+import Application.DateTimeConversion;
 import Entities.MoveRequest;
 import Entities.RequestStatus;
 import javafx.event.ActionEvent;
@@ -70,7 +71,15 @@ public class ScheduleMoveController implements Initializable{
     }
 
     @FXML
+    void actionMove(ActionEvent event){
+        selectedRequest.setStatus(RequestStatus.Actioned);
+        selectedRequest.updateInDatabase();
+    }
+
+    @FXML
     void rejectMove(ActionEvent event) {
+        selectedRequest.setStatus(RequestStatus.Rejected);
+        selectedRequest.updateInDatabase();
     }
 
     @FXML
@@ -83,7 +92,7 @@ public class ScheduleMoveController implements Initializable{
                         getScheduledDateTime())
                 .build().setStatus(selectedRequest.getStatus()).updateInDatabase();*/
         selectedRequest.setStatus(RequestStatus.Accepted);
-        selectedRequest.setScheduledDateTime(MoveRequest.zonedDateTimeToDate(getScheduledDateTime()));
+        selectedRequest.setScheduledDateTime(DateTimeConversion.zonedDateTimeToDate(getScheduledDateTime()));
         selectedRequest.updateInDatabase();
     }
 
@@ -101,18 +110,18 @@ public class ScheduleMoveController implements Initializable{
         txtFieldMoveToBuilding.setText(selectedRequest.getMoveTo().getBuildingNumber());
         txtFieldMoveToSpace.setText(selectedRequest.getMoveTo().getSpaceId());
         txtFieldDate.setText(
-                MoveRequest.dateToZonedDateTime(selectedRequest.getRequestedDateTime()).
+                DateTimeConversion.dateToZonedDateTime(selectedRequest.getRequestedDateTime()).
                         format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
         );
         txtFieldComments.setText(selectedRequest.getComments());
 
         txtFieldStatus.setText(selectedRequest.getStatus().toString());
         try {
-            txtFieldScheduledDate.setText(MoveRequest.dateToZonedDateTime(
+            txtFieldScheduledDate.setText(DateTimeConversion.dateToZonedDateTime(
                     selectedRequest.getScheduledDateTime()).
                     format(DateTimeFormatter.ofPattern("dd/MM/yyyy")
                     ));
-            txtFieldScheduledTime.setText(MoveRequest.dateToZonedDateTime(
+            txtFieldScheduledTime.setText(DateTimeConversion.dateToZonedDateTime(
                     selectedRequest.getScheduledDateTime()).format(DateTimeFormatter.ofPattern("HH:mm")
                     ));
         } catch (NullPointerException e) {

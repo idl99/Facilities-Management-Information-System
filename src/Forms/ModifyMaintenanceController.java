@@ -1,5 +1,6 @@
 package Forms;
 
+import Application.DateTimeConversion;
 import Entities.MaintenanceRequest;
 import Entities.RequestStatus;
 import javafx.event.ActionEvent;
@@ -54,7 +55,7 @@ public class ModifyMaintenanceController implements Initializable{
         requestToModify = MaintenanceRequest.getById(txtFieldRequestNumber.getText());
 
         String status =  requestToModify.getStatus().toString();
-        ZonedDateTime dateTime = MaintenanceRequest.dateToZonedDateTime(requestToModify.getDateTime());
+        ZonedDateTime dateTime = DateTimeConversion.dateToZonedDateTime(requestToModify.getDateTime());
 
         if(status.equals("Actioned")||status.equals("Cancelled")){
             btnUpdate.setDisable(true);
@@ -79,7 +80,7 @@ public class ModifyMaintenanceController implements Initializable{
             requestToModify.updateInDatabase();
         } else{
             requestToModify.setDateTime(
-                MaintenanceRequest.zonedDateTimeToDate(getDateTime()));
+                DateTimeConversion.zonedDateTimeToDate(getDateTime()));
             requestToModify.setDescription(txtAreaDescription.getText());
             requestToModify.setStatus(RequestStatus.Pending);
             requestToModify.updateInDatabase();

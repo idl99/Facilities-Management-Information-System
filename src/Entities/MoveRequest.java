@@ -1,5 +1,6 @@
 package Entities;
 
+import Application.DateTimeConversion;
 import Entities.Space.Space;
 
 import Forms.MessageDialog;
@@ -13,7 +14,6 @@ import org.mongodb.morphia.annotations.PostPersist;
 import org.mongodb.morphia.query.Query;
 
 import java.lang.reflect.Field;
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
@@ -49,13 +49,6 @@ public class MoveRequest{
         return String.valueOf(morphia.getDatastore().createQuery(MoveRequest.class).count()+1);
     }
 
-    public static Date zonedDateTimeToDate(ZonedDateTime zonedDateTime){
-        return Date.from(zonedDateTime.toInstant());
-    }
-
-    public static ZonedDateTime dateToZonedDateTime(Date date){
-        return ZonedDateTime.ofInstant(date.toInstant(), ZoneId.of("Asia/Colombo"));
-    }
 
     public String getRequestId() {
         return requestId;
@@ -167,7 +160,7 @@ public class MoveRequest{
             this.requestId = generateRequestId();
             this.moveTo = moveTo;
             this.requestedBy = requestedBy;
-            this.requestedDateTime = zonedDateTimeToDate(requestedDateTime);
+            this.requestedDateTime = DateTimeConversion.zonedDateTimeToDate(requestedDateTime);
             this.comments = comments;
         }
 
@@ -177,7 +170,7 @@ public class MoveRequest{
         }
 
         public MoveRequestBuilder scheduledFor(ZonedDateTime scheduledDateTime){
-            this.scheduledDateTime = zonedDateTimeToDate(scheduledDateTime);
+            this.scheduledDateTime = DateTimeConversion.zonedDateTimeToDate(scheduledDateTime);
             return this;
         }
 

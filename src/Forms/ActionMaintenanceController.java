@@ -1,5 +1,6 @@
 package Forms;
 
+import Application.DateTimeConversion;
 import Entities.MaintenanceRequest;
 import Entities.RequestStatus;
 import javafx.event.ActionEvent;
@@ -61,7 +62,7 @@ public class ActionMaintenanceController implements Initializable {
     }
 
     void bindRequestDetails(){
-        ZonedDateTime dateTime = MaintenanceRequest.dateToZonedDateTime(selectedRequest.getDateTime());
+        ZonedDateTime dateTime = DateTimeConversion.dateToZonedDateTime(selectedRequest.getDateTime());
         txtFieldDate.setText(dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         txtFieldTime.setText(dateTime.format(DateTimeFormatter.ofPattern("HH:mm")));
         txtAreaDescription.setText(selectedRequest.getDescription());

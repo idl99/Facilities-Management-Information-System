@@ -1,5 +1,6 @@
 package Forms;
 
+import Application.DateTimeConversion;
 import Entities.MoveRequest;
 import Entities.RequestStatus;
 import javafx.fxml.FXML;
@@ -45,10 +46,10 @@ public class ModifyMoveController implements Initializable{
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
-        txtFieldDate.setText(MoveRequest.dateToZonedDateTime(requestToModify.getRequestedDateTime()).format(dateFormatter));
+        txtFieldDate.setText(DateTimeConversion.dateToZonedDateTime(requestToModify.getRequestedDateTime()).format(dateFormatter));
         txtFieldStatus.setText(requestToModify.getStatus().toString());
-        txtFieldScheduleDate.setText(MoveRequest.dateToZonedDateTime(requestToModify.getScheduledDateTime()).format(dateFormatter));
-        txtFieldScheduledTime.setText(MoveRequest.dateToZonedDateTime(requestToModify.getScheduledDateTime()).format(timeFormatter));
+        txtFieldScheduleDate.setText(DateTimeConversion.dateToZonedDateTime(requestToModify.getScheduledDateTime()).format(dateFormatter));
+        txtFieldScheduledTime.setText(DateTimeConversion.dateToZonedDateTime(requestToModify.getScheduledDateTime()).format(timeFormatter));
 
     }
 
@@ -62,7 +63,7 @@ public class ModifyMoveController implements Initializable{
             double timeDiffCurrentAndRequested = requestedTime - scheduledTime;
 
             if(timeDiffCurrentAndRequested>24 && timeDiffCurrentAndScheduled>24 ){
-                requestToModify.setRequestedDateTime(MoveRequest.zonedDateTimeToDate(getDate()));
+                requestToModify.setRequestedDateTime(DateTimeConversion.zonedDateTimeToDate(getDate()));
                 requestToModify.setStatus(RequestStatus.Pending);
                 requestToModify.setScheduledDateTime(new Date());
                 requestToModify.updateInDatabase();
