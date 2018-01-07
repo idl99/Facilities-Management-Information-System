@@ -1,9 +1,11 @@
 package Entities.Furniture;
 
+import Application.DataEntryForm;
 import Entities.Space.Space;
 
 import ErrorHandling.InvalidDataInputException;
 import Forms.MessageDialog;
+import javafx.event.ActionEvent;
 import javafx.scene.image.Image;
 import org.mongodb.morphia.annotations.*;
 import org.mongodb.morphia.query.Query;
@@ -143,14 +145,14 @@ public class FurnitureItem{
     }
 
     @PostPersist
-    void showMessageDialog(){
-        MessageDialog dialog = new MessageDialog.MessageDialogBuilder().
+    void showMessageDialog(ActionEvent event){
+        String response = new MessageDialog.MessageDialogBuilder().
                 withHeader("Successfully inserted record into Furniture Items' Database").
                 withContentText("Successfully inserted Furniture Item (Barcode Id) "+
                         this.barcode+" into Furniture Items' Database").
                 withGraphic(new Image("/Graphics/Icons/Sucess_Icon.png")).
-                build();
-        String response = dialog.show();
+                build().show();
+        DataEntryForm.closeFormOnSubmit(event);
     }
 
 }
