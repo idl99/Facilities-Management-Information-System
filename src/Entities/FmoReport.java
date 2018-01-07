@@ -17,20 +17,18 @@ import java.util.List;
 
 public class FmoReport {
 
+    private Document document;
+    private String fileName;
     private BuildingFloor buildingFloor;
     private int totalAssetValue;
-    private Document document;
 
     public FmoReport(BuildingFloor buildingFloor){
+
         this.buildingFloor = buildingFloor;
-        // 1 Open file
-        // 2 Write to file
-            // Write report headers
-            // Take floor by floor
-            // Print floor detiails
-            // Print furniture details
-            // Repeat for each floor
-        // 3 Close to file
+        this.fileName = "FmoReport" + this.buildingFloor.getBuildingNumber() + "-"
+                + this.buildingFloor.getFloorNumber() + "-"
+                + ZonedDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyyHHmm")) + ".pdf";
+
         try {
             createPdf();
             addHeader();
@@ -46,15 +44,10 @@ public class FmoReport {
         }
     }
 
-    public void createPdf()
-            throws DocumentException, IOException {
-        // step 1
+    public void createPdf() throws DocumentException, IOException {
         document = new Document();
-        // step 2
-        PdfWriter.getInstance(document, new FileOutputStream("FmoReport.pdf"));
-        // step 3
+        PdfWriter.getInstance(document,new FileOutputStream(fileName));
         document.open();
-        // step 5
     }
 
     public void addHeader() throws DocumentException, IOException{
@@ -169,16 +162,19 @@ public class FmoReport {
             totalRoomCost+=item.getPurchase().getCost();
         }
 
-        Chunk chunkTotalRoomCost = new Chunk("Room Total: "+totalRoomCost);
-        this.totalAssetValue += totalRoomCost;
-
         Paragraph furnitureItems = new Paragraph();
         furnitureItems.setSpacingAfter(50f);
         furnitureItems.add(title);
         furnitureItems.add(table);
-        furnitureItems.add(chunkTotalRoomCost);
-
         document.add(furnitureItems);
+
+        Chunk chunkTotalRoomCost = new Chunk("Room Total: "+totalRoomCost);
+        this.totalAssetValue += totalRoomCost;
+
+        Paragraph roomCost = new Paragraph(chunkTotalRoomCost);
+        roomCost.setAlignment(Element.ALIGN_RIGHT);
+        document.add(roomCost);
+
     }
 
     public void addReportFooter() throws DocumentException{
