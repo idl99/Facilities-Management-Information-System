@@ -3,6 +3,7 @@ package Forms;
 import Entities.Furniture.*;
 import Entities.Space.Space;
 
+import ErrorHandling.InvalidDataInputException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -73,6 +74,8 @@ public class FurnitureFormController {
             FormBindings.bindSpaces(choiceBoxSpace,choiceBoxBuilding.getValue());
         }));
 
+        txtFieldCost.setText(String.valueOf(0));
+
     }
 
     @FXML void submitForm(ActionEvent event) {
@@ -91,7 +94,8 @@ public class FurnitureFormController {
             stage.close();
 
         } catch (ParseException e) {
-            e.printStackTrace();
+            InvalidDataInputException.showErrorDialog("Invalid Date entered." +
+                    " Date must be in the format of dd/MM/yyyy.");
         }
     }
 

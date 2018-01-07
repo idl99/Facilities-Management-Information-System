@@ -2,11 +2,10 @@ package Entities.Furniture;
 
 import Entities.Space.Space;
 
+import ErrorHandling.InvalidDataInputException;
 import Forms.MessageDialog;
 import javafx.scene.image.Image;
-import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Id;
-import org.mongodb.morphia.annotations.PostPersist;
+import org.mongodb.morphia.annotations.*;
 import org.mongodb.morphia.query.Query;
 
 import java.lang.reflect.Field;
@@ -99,6 +98,7 @@ public class FurnitureItem{
     }
 
     public void writeToDatabase(){
+        validateBarcode();
         morphia.getDatastore().save(this);
     }
 
@@ -129,6 +129,19 @@ public class FurnitureItem{
         }
     }
 
+    @PrePersist
+    void validateBarcode(){
+        try{
+            // Validate Barcode
+            if(this.barcode.length()!=13) throw new InvalidDataInputException("Invalid Barcode Id. Barcode Id " +
+                    "must be exactly 13 digits in length.") ;
+            else if(this.barcode.matches(".*\\D+.*")) throw new InvalidDataInputException("Invalid Barcode Id. Barcode Id " +
+                    "can only contain digits.");
+        } catch (InvalidDataInputException e){
+            e.showErrorDialog();
+        }
+    }
+
     @PostPersist
     void showMessageDialog(){
         MessageDialog dialog = new MessageDialog.MessageDialogBuilder().
@@ -137,7 +150,7 @@ public class FurnitureItem{
                         this.barcode+" into Furniture Items' Database").
                 withGraphic(new Image("/Graphics/Icons/Sucess_Icon.png")).
                 build();
-        dialog.show();
+        String response = dialog.show();
     }
 
 }
