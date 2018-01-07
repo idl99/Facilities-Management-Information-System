@@ -44,6 +44,38 @@ public class FmoReport {
         }
     }
 
+    public Document getDocument() {
+        return document;
+    }
+
+    public void setDocument(Document document) {
+        this.document = document;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public BuildingFloor getBuildingFloor() {
+        return buildingFloor;
+    }
+
+    public void setBuildingFloor(BuildingFloor buildingFloor) {
+        this.buildingFloor = buildingFloor;
+    }
+
+    public int getTotalAssetValue() {
+        return totalAssetValue;
+    }
+
+    public void setTotalAssetValue(int totalAssetValue) {
+        this.totalAssetValue = totalAssetValue;
+    }
+
     public void createPdf() throws DocumentException, IOException {
         document = new Document();
         PdfWriter.getInstance(document,new FileOutputStream(fileName));

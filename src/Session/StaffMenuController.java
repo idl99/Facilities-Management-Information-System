@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -66,6 +67,15 @@ public class StaffMenuController implements Initializable{
         BuildingFloor selected = BuildingFloor.getById(response);
 
         FmoReport report = new FmoReport(selected);
+
+        response = new MessageDialog.MessageDialogBuilder()
+                .withTitle("GENERATED FMO REPORT").withHeader("Successfully generated FMO Report")
+                .withContentText("Successfully generated FMO report for Building Number: "
+                        +selected.getBuildingNumber()+" Floor Number: "
+                        +selected.getFloorNumber()+". Report saved to Application folder under filename: "
+                        +report.getFileName())
+                .withGraphic(new Image("/Graphics/Icons/Sucess_Icon.png"))
+                .build().show();
 
     }
 }
