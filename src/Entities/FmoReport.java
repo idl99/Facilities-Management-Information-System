@@ -163,7 +163,6 @@ public class FmoReport {
         }
 
         Paragraph furnitureItems = new Paragraph();
-        furnitureItems.setSpacingAfter(50f);
         furnitureItems.add(title);
         furnitureItems.add(table);
         document.add(furnitureItems);
@@ -172,6 +171,7 @@ public class FmoReport {
         this.totalAssetValue += totalRoomCost;
 
         Paragraph roomCost = new Paragraph(chunkTotalRoomCost);
+        roomCost.setSpacingAfter(50f);
         roomCost.setAlignment(Element.ALIGN_RIGHT);
         document.add(roomCost);
 
