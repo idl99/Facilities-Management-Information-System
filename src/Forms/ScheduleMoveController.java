@@ -1,5 +1,6 @@
 package Forms;
 
+import Application.DataEntryForm;
 import Application.DateTimeConversion;
 import Entities.MoveRequest;
 import Entities.RequestStatus;
@@ -74,12 +75,14 @@ public class ScheduleMoveController implements Initializable{
     void actionMove(ActionEvent event){
         selectedRequest.setStatus(RequestStatus.Actioned);
         selectedRequest.updateInDatabase();
+        DataEntryForm.closeFormOnSubmit(event);
     }
 
     @FXML
     void rejectMove(ActionEvent event) {
         selectedRequest.setStatus(RequestStatus.Rejected);
         selectedRequest.updateInDatabase();
+        DataEntryForm.closeFormOnSubmit(event);
     }
 
     @FXML
@@ -94,6 +97,7 @@ public class ScheduleMoveController implements Initializable{
         selectedRequest.setStatus(RequestStatus.Accepted);
         selectedRequest.setScheduledDateTime(DateTimeConversion.zonedDateTimeToDate(getScheduledDateTime()));
         selectedRequest.updateInDatabase();
+        DataEntryForm.closeFormOnSubmit(event);
     }
 
     void bindMoveRequests(ListView view){

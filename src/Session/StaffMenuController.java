@@ -1,17 +1,14 @@
 package Session;
 
+import Application.DataEntryForm;
 import Entities.BuildingFloor;
 import Entities.FmoReport;
 import Forms.MessageDialog;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,27 +27,27 @@ public class StaffMenuController implements Initializable{
 
     @FXML
     void makeRelocationRequest(){
-        newFormWindow("/Forms/MoveRequestForm.fxml");
+        new DataEntryForm("/Forms/MoveRequestForm.fxml");
     }
 
     @FXML
     void makeMaintenanceRequest(){
-        newFormWindow("/Forms/MaintenanceRequestForm.fxml");
+        new DataEntryForm("/Forms/MaintenanceRequestForm.fxml");
     }
 
     @FXML
     void modifyMoveRequest(){
-        newFormWindow("/Forms/ModifyMoveForm.fxml");
+        new DataEntryForm("/Forms/ModifyMoveForm.fxml");
     }
 
     @FXML
     void modifyMaintenanceRequest(){
-        newFormWindow("/Forms/ModifyMaintenanceForm.fxml");
+        new DataEntryForm("/Forms/ModifyMaintenanceForm.fxml");
     }
 
     @FXML
     void viewFloorPlans(ActionEvent event){
-        newFormWindow("/Forms/ViewFloorPlan.fxml");
+        new DataEntryForm("/Forms/ViewFloorPlan.fxml");
     }
 
     @FXML
@@ -70,16 +67,5 @@ public class StaffMenuController implements Initializable{
 
         FmoReport report = new FmoReport(selected);
 
-    }
-
-    void newFormWindow(String fxmlResource){
-        try {
-            Stage stage = new Stage();
-            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource(fxmlResource))));
-            stage.setResizable(false);
-            stage.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

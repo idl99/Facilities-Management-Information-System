@@ -1,7 +1,10 @@
 package Entities.Space;
 
+import Forms.MessageDialog;
+import javafx.scene.image.Image;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.PostPersist;
 
 import java.util.List;
 
@@ -111,4 +114,13 @@ public class Space{
                 .field("floorNumber").equal(floorNumber).asList();
     }
 
+    @PostPersist
+    void showMessageDialog(){
+        new MessageDialog.MessageDialogBuilder()
+                .withTitle("FMIS - Floor Form Submission")
+                .withHeader("Successfully recorded details")
+                .withContentText("Successfully recorded details of Space number: "+this.spaceId+
+                        " in Building Number: "+this.buildingNumber)
+                .withGraphic(new Image("/Graphics/Icons/Sucess_Icon.png")).build().show();
+    }
 }

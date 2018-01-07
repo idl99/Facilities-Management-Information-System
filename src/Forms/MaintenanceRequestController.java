@@ -1,5 +1,6 @@
 package Forms;
 
+import Application.DataEntryForm;
 import Entities.MaintenanceRequest;
 import Entities.Space.Space;
 
@@ -56,8 +57,8 @@ public class MaintenanceRequestController implements Initializable{
         );
         request.writeToDatabase();
 
-        Stage stage = (Stage)((Node)(event.getSource())).getScene().getWindow();
-        stage.close();
+        DataEntryForm.closeFormOnSubmit(event);
+
     }
 
     @FXML

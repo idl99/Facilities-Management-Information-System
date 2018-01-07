@@ -1,5 +1,6 @@
 package Forms;
 
+import Application.DataEntryForm;
 import Entities.Space.Space;
 import Entities.Space.SpaceType;
 
@@ -67,40 +68,8 @@ public class SpaceFormController implements Initializable {
                 choiceBoxSpaceType.getValue(),
                 textFieldEmployeeId.getText(),
                 txtFieldDepartment.getText());
+        space.writeToDatabase();
 
-        String response = space.writeToDatabase();
-
-        // Clearing text fields
-        for(TextField textField:new TextField[]{txtFieldSpaceId,textFieldEmployeeId,
-                txtFieldDepartment,txtFieldSpaceName}){
-            textField.clear();
-        }
-
-        // Clearing choice box fields
-        for(ChoiceBox<?> choiceBox: new ChoiceBox[]{choiceBoxBuildingNum,choiceBoxFloorNum,
-                choiceBoxSpaceType}){
-            choiceBox.valueProperty().setValue(null);
-        }
-
-        // Display message dialog
-        if(showMessageDialog(response).get() == ButtonType.CANCEL ){
-            ((Stage)(((Node)(event.getSource())).getScene().getWindow())).close();
-        }
-
-
+        DataEntryForm.closeFormOnSubmit(event);
     }
-
-    Optional<ButtonType> showMessageDialog(String message){
-
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("FMIS - Floor Form Submission");
-        alert.setHeaderText("Successfully recorded details");
-        alert.setContentText(message+" Do you wish to add any more records? " +
-                "If YES, Click on OK, else Click on Cancel to Exit");
-        alert.setGraphic(new ImageView(new Image("/Graphics/Icons/Sucess_Icon.png")));
-        Optional<ButtonType> result = alert.showAndWait();
-
-        return result;
-    }
-
 }

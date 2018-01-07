@@ -1,5 +1,6 @@
 package Forms;
 
+import Application.DataEntryForm;
 import Entities.Furniture.*;
 import Entities.Space.Space;
 
@@ -90,8 +91,7 @@ public class FurnitureFormController {
             );
             record.writeToDatabase();
 
-            Stage stage = (Stage)((Node)(event.getSource())).getScene().getWindow();
-            stage.close();
+            DataEntryForm.closeFormOnSubmit(event);
 
         } catch (ParseException e) {
             InvalidDataInputException.showErrorDialog("Invalid Date entered." +

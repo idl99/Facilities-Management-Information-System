@@ -1,8 +1,10 @@
 package Forms;
 
+import Application.DataEntryForm;
 import Application.DateTimeConversion;
 import Entities.MoveRequest;
 import Entities.RequestStatus;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -53,7 +55,7 @@ public class ModifyMoveController implements Initializable{
 
     }
 
-    @FXML void updateMoveRequest(){
+    @FXML void updateMoveRequest(ActionEvent event){
         if(requestToModify.getRequestedDateTime().getTime() !=
                 getDate().toEpochSecond()){
             long currentTime = new Date().getTime()/(3600*1000);
@@ -68,14 +70,17 @@ public class ModifyMoveController implements Initializable{
                 requestToModify.setScheduledDateTime(new Date());
                 requestToModify.updateInDatabase();
             }
-
         }
+
+        DataEntryForm.closeFormOnSubmit(event);
+
     }
 
     @FXML
-    void cancelMoveRequest(){
+    void cancelMoveRequest(ActionEvent event){
         requestToModify.setStatus(RequestStatus.Cancelled);
         requestToModify.updateInDatabase();
+        DataEntryForm.closeFormOnSubmit(event);
     }
 
     @FXML

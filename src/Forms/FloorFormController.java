@@ -1,13 +1,19 @@
 package Forms;
 
+import Application.DataEntryForm;
 import Entities.BuildingFloor;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
-public class FloorFormController{
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class FloorFormController implements Initializable{
 
     @FXML private TextField txtFieldBuildingNum;
 
@@ -23,12 +29,12 @@ public class FloorFormController{
 
     @FXML private ImageView iconSuccess;
 
-    @FXML
-    void initialize() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
 
     }
 
-    @FXML void submitForm(){
+    @FXML void submitForm(ActionEvent event){
 
         BuildingFloor record = new BuildingFloor(txtFieldBuildingNum.getText(),
                 txtFieldBuildingName.getText(),
@@ -36,14 +42,9 @@ public class FloorFormController{
                 txtFieldFloorGFA.getText(),
                 txtFieldFloorUFA.getText());
 
-        String response = record.writeToDatabase();
+        record.writeToDatabase();
 
-        iconSuccess.setVisible(true);
-        lblSuccessMsg.setText(response+". You may continue to add details of a new building floor above," +
-                "or close this window");
-        for(TextField textfield: new TextField[]{txtFieldBuildingNum,txtFieldBuildingName,
-                                                txtFieldFloorNum,txtFieldFloorGFA,txtFieldFloorUFA}){
-            textfield.clear();
-        }
+        DataEntryForm.closeFormOnSubmit(event);
+
     }
 }

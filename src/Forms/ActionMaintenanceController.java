@@ -1,5 +1,6 @@
 package Forms;
 
+import Application.DataEntryForm;
 import Application.DateTimeConversion;
 import Entities.MaintenanceRequest;
 import Entities.RequestStatus;
@@ -73,6 +74,7 @@ public class ActionMaintenanceController implements Initializable {
     void setAsActioned(ActionEvent event) {
         selectedRequest.setStatus(RequestStatus.Actioned);
         selectedRequest.updateInDatabase();
+        DataEntryForm.closeFormOnSubmit(event);
     }
 
 }

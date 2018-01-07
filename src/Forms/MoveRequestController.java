@@ -1,5 +1,6 @@
 package Forms;
 
+import Application.DataEntryForm;
 import Entities.MoveRequest;
 import Entities.Space.Space;
 import Entities.Space.SpaceType;
@@ -59,8 +60,7 @@ public class MoveRequestController implements Initializable {
                 txtFieldComments.getText()
         ).build().writeToDatabase();
 
-        Stage stage = (Stage)((Node)(event.getSource())).getScene().getWindow();
-        stage.close();
+        DataEntryForm.closeFormOnSubmit(event);
 
     }
 

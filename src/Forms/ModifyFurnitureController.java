@@ -1,5 +1,6 @@
 package Forms;
 
+import Application.DataEntryForm;
 import Entities.Furniture.FurnitureItem;
 import Entities.Furniture.FurnitureItemStatus;
 import Entities.Space.Space;
@@ -67,10 +68,13 @@ public class ModifyFurnitureController implements Initializable {
 
     @FXML
     void submitForm(ActionEvent event) {
+
         itemToModify.setKeyNumber(txtFieldKeyNum.getText());
         itemToModify.setStatus(choiceBoxStatus.getValue());
         itemToModify.setLocation(new Space(choiceBoxBuilding.getValue(),choiceBoxSpace.getValue()));
         itemToModify.updateInDatabase();
+
+        DataEntryForm.closeFormOnSubmit(event);
     }
 
 }

@@ -1,5 +1,6 @@
 package Forms;
 
+import Application.DataEntryForm;
 import Application.DateTimeConversion;
 import Entities.MaintenanceRequest;
 import Entities.RequestStatus;
@@ -75,6 +76,7 @@ public class ModifyMaintenanceController implements Initializable{
 
     @FXML
     void submitForm(ActionEvent event) {
+
         if(((Node)event.getSource()).getId().equals("btnCancel")) {
             requestToModify.setStatus(RequestStatus.Cancelled);
             requestToModify.updateInDatabase();
@@ -85,6 +87,9 @@ public class ModifyMaintenanceController implements Initializable{
             requestToModify.setStatus(RequestStatus.Pending);
             requestToModify.updateInDatabase();
         }
+
+        DataEntryForm.closeFormOnSubmit(event);
+
     }
 
     @FXML

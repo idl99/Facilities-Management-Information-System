@@ -86,9 +86,8 @@ public class BuildingFloor{
         this.UFA = UFA;
     }
 
-    public String writeToDatabase() {
+    public void writeToDatabase() {
         morphia.getDatastore().save(this);
-        return "Successfully added details of Building number- "+getBuildingNumber()+" Floor number- "+getFloorNumber();
     }
 
     public static List<BuildingFloor> getAll(){
