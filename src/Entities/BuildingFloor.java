@@ -1,5 +1,7 @@
 package Entities;
 
+import Forms.MessageDialog;
+import javafx.scene.image.Image;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.*;
@@ -124,6 +126,16 @@ public class BuildingFloor{
         while (iterator.hasNext()) list.add(iterator.next().getString("_id"));
 
         return list;
+    }
+
+    @PostPersist
+    void showMessageDialog(){
+        new MessageDialog.MessageDialogBuilder()
+                .withTitle("FMIS - Building Floor Form Submission")
+                .withHeader("Successfully recorded details")
+                .withContentText("Successfully recorded details of Floor number: "+this.floorNumber+
+                        " in Building Number: "+this.buildingNumber)
+                .withGraphic(new Image("/Graphics/Icons/Sucess_Icon.png")).build().show();
     }
 
 

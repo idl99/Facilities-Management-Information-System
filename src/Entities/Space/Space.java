@@ -117,7 +117,7 @@ public class Space{
     @PostPersist
     void showMessageDialog(){
         new MessageDialog.MessageDialogBuilder()
-                .withTitle("FMIS - Floor Form Submission")
+                .withTitle("FMIS - Space Form Submission")
                 .withHeader("Successfully recorded details")
                 .withContentText("Successfully recorded details of Space number: "+this.spaceId+
                         " in Building Number: "+this.buildingNumber)

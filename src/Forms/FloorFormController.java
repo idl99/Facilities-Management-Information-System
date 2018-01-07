@@ -25,10 +25,6 @@ public class FloorFormController implements Initializable{
 
     @FXML private TextField txtFieldFloorUFA;
 
-    @FXML private Label lblSuccessMsg;
-
-    @FXML private ImageView iconSuccess;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
