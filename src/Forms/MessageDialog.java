@@ -25,7 +25,11 @@ public class MessageDialog {
         this.dialog = dialog;
     }
 
-    public String show(){
+    public void show(){
+        dialog.showAndWait();
+    }
+
+    public String _show(){
         Optional<String> result =  dialog.showAndWait();
         return result.get();
     }

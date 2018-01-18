@@ -12,7 +12,7 @@ public class InvalidDataInputException extends Exception {
     }
 
     public static void showErrorDialog(String message){
-        String response = new MessageDialog.MessageDialogBuilder()
+        new MessageDialog.MessageDialogBuilder()
                 .withTitle("ERROR: INVALID DATA INPUT")
                 .withHeader("Invalid Data Input")
                 .withContentText(message+" Please refill the form with valid data.")

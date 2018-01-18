@@ -62,13 +62,13 @@ public class StaffMenuController implements Initializable{
 
         String response = new MessageDialog.MessageDialogBuilder().choiceDialogType(buildingFloors
         ).withTitle("GENERATE FMO REPORT").withHeader("Generate FMO Report").
-                withContentText("Select the building floor (Building Number - Floor Number)").build().show();
+                withContentText("Select the building floor (Building Number - Floor Number)").build()._show();
 
         BuildingFloor selected = BuildingFloor.getById(response);
 
         FmoReport report = new FmoReport(selected);
 
-        response = new MessageDialog.MessageDialogBuilder()
+        new MessageDialog.MessageDialogBuilder()
                 .withTitle("GENERATED FMO REPORT").withHeader("Successfully generated FMO Report")
                 .withContentText("Successfully generated FMO report for Building Number: "
                         +selected.getBuildingNumber()+" Floor Number: "

@@ -146,7 +146,7 @@ public class FurnitureItem{
 
     @PostPersist
     void showMessageDialog(ActionEvent event){
-        String response = new MessageDialog.MessageDialogBuilder().
+        new MessageDialog.MessageDialogBuilder().
                 withHeader("Successfully inserted record into Furniture Items' Database").
                 withContentText("Successfully inserted Furniture Item (Barcode Id) "+
                         this.barcode+" into Furniture Items' Database").
