@@ -67,8 +67,8 @@ public class ModifyMoveController implements Initializable{
             if(timeDiffCurrentAndRequested>24 && timeDiffCurrentAndScheduled>24 ){
                 requestToModify.setRequestedDateTime(DateTimeConversion.zonedDateTimeToDate(getDate()));
                 requestToModify.setStatus(RequestStatus.Pending);
-                requestToModify.setScheduledDateTime(new Date());
                 requestToModify.updateInDatabase();
+                requestToModify.unsetScheduledDateTime();
             }
         }
 

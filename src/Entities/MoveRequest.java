@@ -135,6 +135,15 @@ public class MoveRequest{
         }
     }
 
+    public void unsetScheduledDateTime(){
+        Query<MoveRequest> query = morphia.getDatastore().createQuery(MoveRequest.class).
+                field("_id").equal(this.requestId);
+        morphia.getDatastore().updateFirst(query,
+                morphia.getDatastore().createUpdateOperations(MoveRequest.class)
+                        .unset("scheduledDateTime")
+        );
+    }
+
     @PostPersist
     void showMessageDialog(){
         MessageDialog dialog = new MessageDialog.MessageDialogBuilder().

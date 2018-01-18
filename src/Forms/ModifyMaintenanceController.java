@@ -60,11 +60,11 @@ public class ModifyMaintenanceController implements Initializable{
 
         if(status.equals("Actioned")||status.equals("Cancelled")){
             btnUpdate.setDisable(true);
-        } else btnUpdate.setDisable(false);
-
-        if(status.equals("Cancelled")){
             btnCancel.setDisable(true);
-        } else btnUpdate.setDisable(false);
+        } else {
+            btnUpdate.setDisable(false);
+            btnCancel.setDisable(false);
+        }
 
         txtFieldDate.setText(dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         txtFieldTime.setText(dateTime.format(DateTimeFormatter.ofPattern("HH:mm")));
