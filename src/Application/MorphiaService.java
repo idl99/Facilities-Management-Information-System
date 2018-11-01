@@ -13,7 +13,7 @@ public class MorphiaService {
     MorphiaService(){
 
         this.morphia = new Morphia();
-        MongoClient client = new MongoClient(new MongoClientURI("mongodb+srv://ihan:ihan@cluster0-atuo4.mongodb.net/test"));
+        MongoClient client = new MongoClient(new MongoClientURI("### insert Mongo Client Uri here ###"));
         this.datastore = morphia.createDatastore(client,
                 "Cw03Database");
 
